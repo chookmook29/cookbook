@@ -1,12 +1,13 @@
 import os
 from flask import Flask, render_template, request, url_for, session, redirect
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.secret_key = ']Nk(`K24HLRuRkdN'
 
 app.config["MONGO_DBNAME"] = 'cookbook'
-app.config["MONGO_URI"] = 'mongodb://root:wk$<RQ+DV7^v548[@ds157834.mlab.com:57834/cookbook'
+app.config["MONGO_URI"] = 'mongodb://admin:hadvjecbscW2vm4m@ds157834.mlab.com:57834/cookbook'
 
 mongo = PyMongo(app)
 
