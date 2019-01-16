@@ -26,6 +26,7 @@ def sign_in():
         user_found = users.find_one({'user': request.form['user']})
         if user_found:
             if request.form['password'] == user_found['password']:
+                session['user'] = request.form['user']
                 return redirect(url_for('index'))
             return render_template('sign_in.html')
         return render_template('sign_in.html')
@@ -33,6 +34,7 @@ def sign_in():
 
 @app.route('/sign_out')
 def sign_out():
+    session.pop('user')
     return render_template('index.html')
 
 @app.route('/show_recipes')
