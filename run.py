@@ -11,23 +11,27 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def index():
-	return render_template('index.html')
-
-@app.route('/dashboard/<user>')# Some dynamic routing to improve UX
-def dashboard(user):
-    return render_template('dashboard.html', user=user)
-
-@app.route('/sign_in')
-def sign_in():
-    return render_template('sign_in.html')
-
-@app.route('/sign_out')
-def sign_out():
     return render_template('index.html')
 
 @app.route('/register')
 def register():
     return render_template('register.html')
+
+@app.route('/sign_in', methods=['GET', 'POST'])
+def sign_in():
+    if request.method =='POST':
+        users = mongo.db.users
+        user_found = users.find_one({'user': request.form['user']})
+        if user_found:
+            if request.form['password'] == user_found['password']:
+                return redirect(url_for('index'))
+            return render_template('sign_in.html')
+        return render_template('sign_in.html')
+    return render_template('sign_in.html')
+
+@app.route('/sign_out')
+def sign_out():
+    return render_template('index.html')
 
 @app.route('/show_recipes')
 def show_recipes():
@@ -38,6 +42,6 @@ def add_recipe():
     return render_template('add_recipe.html')
 
 if __name__ == '__main__':
-	app.run(host=os.environ.get('IP'),
-			port=int(os.environ.get('PORT')),
-			debug=True)
+    app.run(host=os.environ.get('IP'),
+            port=int(os.environ.get('PORT')),
+            debug=True)
