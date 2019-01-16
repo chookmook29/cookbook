@@ -1,6 +1,12 @@
-from flask import Flask, render_template, request, url_for, session
+from flask import Flask, render_template, request, url_for, session, redirect
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
+
+app.config["MONGO_DBNAME"] = 'cookbook'
+app.config["MONGO_URI"] = 'mongodb://root:wk$<RQ+DV7^v548[@ds157834.mlab.com:57834/cookbook'
+
+mongo = PyMongo(app)
 
 @app.route('/')
 def index():
