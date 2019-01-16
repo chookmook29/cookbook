@@ -6,6 +6,12 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
+<a href='{{ url_for('index') }}'>Home</a>
+<a href='{{ url_for('sign_in') }}'>Sign In</a>
+<a href='{{ url_for('register') }}'>Register</a>
+<a href='{{ url_for('sign_out') }}'>Sign Out</a>
+<a href='{{ url_for('add_recipe') }}'>Add Recipe</a>
+<a href='{{ url_for('show_recipes') }}'>Show Recipes</a>
 {% block content %}
 {% endblock %}
 </body>
