@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, url_for, session, redirect
 from flask_pymongo import PyMongo
 
