@@ -15,8 +15,14 @@ mongo = PyMongo(app)
 def index():
     return render_template('index.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        users = mongo.db.users
+        user = request.form['user']
+        password = request.form['password']
+        users.insert({'user': user, 'password': password})
+        return redirect(url_for('index'))
     return render_template('register.html')
 
 @app.route('/sign_in', methods=['GET', 'POST'])
@@ -25,7 +31,7 @@ def sign_in():
         users = mongo.db.users
         user_found = users.find_one({'user': request.form['user']})
         if user_found:
-            if request.form['password'] == user_found['password']:
+            if (user_found['password'], request.form['password']):
                 session['user'] = request.form['user']
                 return redirect(url_for('index'))
             return render_template('sign_in.html')
@@ -34,7 +40,7 @@ def sign_in():
 
 @app.route('/sign_out')
 def sign_out():
-    session.pop('user')
+    session.clear()
     return render_template('index.html')
 
 @app.route('/show_recipes')
