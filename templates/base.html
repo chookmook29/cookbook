@@ -6,15 +6,17 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-<a href='{{ url_for('index') }}'>Home</a>
-{% if 'user' in session %}
-<a href='{{ url_for('sign_out') }}'>Sign Out</a>
-<a href='{{ url_for('add_recipe') }}'>Add Recipe</a>
-{% else %}
-<a href='{{ url_for('sign_in') }}'>Sign In</a>
-<a href='{{ url_for('register') }}'>Register</a>
-{% endif %}
-<a href='{{ url_for('show_recipes') }}'>Show Recipes</a>
+	<div class="topnav">	
+		<a href='{{ url_for('index') }}'>Home</a>
+		{% if 'user' in session %}
+		<a href='{{ url_for('sign_out') }}'>Sign Out</a>
+		<a href='{{ url_for('add_recipe') }}'>Add Recipe</a>
+		{% else %}
+		<a href='{{ url_for('sign_in') }}'>Sign In</a>
+		<a href='{{ url_for('register') }}'>Register</a>
+		{% endif %}
+		<a href='{{ url_for('show_recipes') }}'>Show Recipes</a>
+	</div>
 {% block content %}
 {% endblock %}
 </body>

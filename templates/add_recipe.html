@@ -2,7 +2,7 @@
 {% block content %}
 <form action='{{url_for('add_recipe')}}' method="POST">
 	<label for='name'>Recipe name</label>
-	<input type='text' name='name' required>
-	<button type='submit' name='action'>Submit</button>
+	<input type='text' name='name' class="form-control" required>
+	<button type='submit' name='action' class="btn btn-dark">Submit</button>
 </form>
 {% endblock %}
