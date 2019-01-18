@@ -45,10 +45,16 @@ def sign_out():
 
 @app.route('/show_recipes')
 def show_recipes():
-    return render_template('show_recipes.html')
+    recipes = mongo.db.recipes.find()
+    return render_template('show_recipes.html', recipes=recipes)
 
-@app.route('/add_recipe')
+@app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
+    if request.method == 'POST':
+        recipes = mongo.db.recipes
+        name = request.form['name']
+        recipes.insert({'name': name})
+        return redirect(url_for('index'))
     return render_template('add_recipe.html')
 
 if __name__ == '__main__':
