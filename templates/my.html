@@ -2,8 +2,7 @@
 {% block content %}
 {% for recipe in my_recipes %}
 	<div>
-		<a href="{{url_for('show_single', single_id=recipe._id)}}">{{recipe.name}}</a>
-		<a href="{{url_for('show_single', single_id=recipe._id)}}">{{recipe.image}}</a>
+		<p>{{recipe.name}}</div>
 	</div>
 {% endfor %}
 {% endblock %}
