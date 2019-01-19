@@ -55,7 +55,15 @@ def add_recipe():
         name = request.form['name']
         recipes.insert({'name': name})
         return redirect(url_for('index'))
-    return render_template('add_recipe.html')
+    return render_template('add.html')
+
+@app.route('/edit_recipe', methods=['GET', 'POST'])
+def edit_recipe():
+    return render_template('edit.html')
+
+@app.route('/delete_recipe', methods=['GET', 'POST'])
+def delete_recipe():
+    return render_template('delete.html')
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
