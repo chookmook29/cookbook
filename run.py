@@ -53,6 +53,7 @@ def add_recipe():
     if request.method == 'POST':
         recipes = mongo.db.recipes
         recipes.insert({
+            'creator': session['user'],
             'name': request.form['name'], 
             'image': request.form['image'], 
             'description': request.form['description'],
@@ -67,6 +68,12 @@ def add_recipe():
             })
         return redirect(url_for('index'))
     return render_template('add.html')
+
+@app.route('/my_recipes/<user>')
+def my_recipes(user):
+    user = mongo.db.users.find_one()({'user': session['user']})
+    my_recipes = mongo.db.recipes.find()({'creator': session['user']})
+    return render_template('my.html')
 
 @app.route('/edit_recipe', methods=['GET', 'POST'])
 def edit_recipe():
