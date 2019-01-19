@@ -65,6 +65,11 @@ def edit_recipe():
 def delete_recipe():
     return render_template('delete.html')
 
+@app.route('/show_single/<single_id>')
+def show_single(single_id):
+    single_recipe = mongo.db.recipes.find_one({"_id": ObjectId(single_id)})
+    return render_template('show_single.html', single_recipe=single_recipe)
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
