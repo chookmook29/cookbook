@@ -52,8 +52,19 @@ def show_all():
 def add_recipe():
     if request.method == 'POST':
         recipes = mongo.db.recipes
-        name = request.form['name']
-        recipes.insert({'name': name})
+        recipes.insert({
+            'name': request.form['name'], 
+            'image': request.form['image'], 
+            'description': request.form['description'],
+            'key_ingredient_1': request.form['key_ingredient_1'],
+            'key_ingredient_2': request.form['key_ingredient_2'],
+            'key_ingredient_3': request.form['key_ingredient_3'],
+            'calories': request.form['calories'],
+            'time': request.form['time'],
+            'serves': request.form['serves'],
+            'substitute_1': request.form['substitute_1'],
+            'substitute_2': request.form['substitute_2']
+            })
         return redirect(url_for('index'))
     return render_template('add.html')
 
