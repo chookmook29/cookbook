@@ -43,10 +43,10 @@ def sign_out():
     session.clear()
     return render_template('index.html')
 
-@app.route('/show_recipes')
-def show_recipes():
+@app.route('/show_all')
+def show_all():
     recipes = mongo.db.recipes.find()
-    return render_template('show_recipes.html', recipes=recipes)
+    return render_template('show_all.html', recipes=recipes)
 
 @app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
