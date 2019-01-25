@@ -64,7 +64,10 @@ def add_recipe():
             'time': request.form['time'],
             'serves': request.form['serves'],
             'substitute_1': request.form['substitute_1'],
-            'substitute_2': request.form['substitute_2']
+            'substitute_2': request.form['substitute_2'],
+            'voted_list': "",
+            'upvotes': "0",
+            'downvotes': "0"
             })
         return redirect(url_for('index'))
     return render_template('add.html')

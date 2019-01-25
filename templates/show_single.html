@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>{{ single_recipe.name }}</p>
+<h1>{{ single_recipe.name }}</1>
 <p>{{ single_recipe.key_ingredient_1 }}</p>
+<p>{{ single_recipe.key_ingredient_2 }}</p>
+<p>{{ single_recipe.key_ingredient_3 }}</p>
+<p>{{ single_recipe.description }}</p>
+<p>{{ single_recipe.calories }} kcal</p>
+<p>{{ single_recipe.time }} min</p>
+<p>{{ single_recipe.serves }}</p>
+<p>{{ single_recipe.substitute_1 }}</p>
+<p>{{ single_recipe.substitute_2 }}</p>
+<p>{{ single_recipe.upvotes }}</p>
+<p>{{ single_recipe.downvotes }}</p>
 {% endblock %}
