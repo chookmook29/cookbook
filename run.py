@@ -78,9 +78,32 @@ def my_recipes():
     my_recipes = mongo.db.recipes.find({"creator": session['user']})
     return render_template('my.html', my_recipes=my_recipes, user=user)
 
-@app.route('/edit_recipe', methods=['GET', 'POST'])
-def edit_recipe():
-    return render_template('edit.html')
+@app.route('/edit_recipe/<edit_id>')
+def edit_recipe(edit_id):
+    single_edit = mongo.db.recipes.find_one({"_id": ObjectId(edit_id)})
+    return render_template('edit.html', single_edit=single_edit)
+
+@app.route('/update_recipe', methods=['POST'])
+def update_recipe(edit_id):
+    recipes = mongo.db.recipes
+    recipes.update(
+            {'_id': ObjectId(edit_id)},
+            {
+                'creator': session['user'],
+                'name': request.form['name'], 
+                'image': request.form['image'], 
+                'description': request.form['description'],
+                'key_ingredient_1': request.form['key_ingredient_1'],
+                'key_ingredient_2': request.form['key_ingredient_2'],
+                'key_ingredient_3': request.form['key_ingredient_3'],
+                'calories': request.form['calories'],
+                'time': request.form['time'],
+                'serves': request.form['serves'],
+                'substitute_1': request.form['substitute_1'],
+                'substitute_2': request.form['substitute_2']
+            })
+    return render_template('update.html')
+
 
 @app.route('/delete/<delete_id>')
 def delete_recipe(delete_id):
