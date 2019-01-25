@@ -80,11 +80,13 @@ def my_recipes():
 
 @app.route('/edit_recipe/<edit_id>')
 def edit_recipe(edit_id):
+    session['edit_id'] = edit_id
     single_edit = mongo.db.recipes.find_one({"_id": ObjectId(edit_id)})
     return render_template('edit.html', single_edit=single_edit)
 
-@app.route('/update_recipe', methods=['POST'])
-def update_recipe(edit_id):
+@app.route('/update_recipe/', methods=['POST'])
+def update_recipe():
+    edit_id = session.get('edit_id')
     recipes = mongo.db.recipes
     recipes.update(
             {'_id': ObjectId(edit_id)},
