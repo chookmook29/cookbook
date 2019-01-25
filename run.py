@@ -79,9 +79,10 @@ def my_recipes():
 def edit_recipe():
     return render_template('edit.html')
 
-@app.route('/delete_recipe', methods=['GET', 'POST'])
-def delete_recipe():
-    return render_template('delete.html')
+@app.route('/delete/<delete_id>')
+def delete_recipe(delete_id):
+    single_delete = mongo.db.recipes.remove({"_id": ObjectId(delete_id)})
+    return render_template('delete.html', single_delete=single_delete)
 
 @app.route('/show_single/<single_id>')
 def show_single(single_id):
