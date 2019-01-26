@@ -69,7 +69,7 @@ def add_recipe():
             'upvotes': "0",
             'downvotes': "0"
             })
-        return redirect(url_for('index'))
+        return redirect(url_for('my_recipes'))
     return render_template('add.html')
 
 @app.route('/my_recipes/')
@@ -102,10 +102,12 @@ def update_recipe():
                 'time': request.form['time'],
                 'serves': request.form['serves'],
                 'substitute_1': request.form['substitute_1'],
-                'substitute_2': request.form['substitute_2']
+                'substitute_2': request.form['substitute_2'],
+                'voted_list': "",
+                'upvotes': "0",
+                'downvotes': "0"
             })
     return render_template('update.html')
-
 
 @app.route('/delete/<delete_id>')
 def delete_recipe(delete_id):
