@@ -11,4 +11,10 @@
 <p>{{ single_recipe.substitute_1 }}</p>
 <p>{{ single_recipe.substitute_2 }}</p>
 <p>upvotes: {{ single_recipe.upvotes }} downvotes: {{ single_recipe.downvotes }}</p>
+<form action='{{url_for('upvote_recipe')}}' method="POST">
+	<button type='submit' name='action' class="btn btn-dark">Upvote</button>
+</form>
+<form action='{{url_for('downvote_recipe')}}' method="POST">
+	<button type='submit' name='action' class="btn btn-dark">Downvote</button>
+</form>
 {% endblock %}

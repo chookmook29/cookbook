@@ -117,7 +117,111 @@ def delete_recipe(delete_id):
 @app.route('/show_single/<single_id>')
 def show_single(single_id):
     single_recipe = mongo.db.recipes.find_one({"_id": ObjectId(single_id)})
+    session['single_id'] = single_id
+    creator = list(single_recipe.values())[1]
+    session['creator'] = creator
+    name = list(single_recipe.values())[2]
+    session['name'] = name
+    image = list(single_recipe.values())[3]
+    session['image'] = image
+    description = list(single_recipe.values())[4]
+    session['description'] = description
+    key_1 = list(single_recipe.values())[5]
+    session['key_1'] = key_1
+    key_2 = list(single_recipe.values())[6]
+    session['key_2'] = key_2
+    key_3 = list(single_recipe.values())[7]
+    session['key_3'] = key_3
+    calories = list(single_recipe.values())[8]
+    session['calories'] = calories
+    time = list(single_recipe.values())[9]
+    session['time'] = time
+    serves = list(single_recipe.values())[10]
+    session['serves'] = serves
+    sub_1 = list(single_recipe.values())[11]
+    session['sub_1'] = sub_1
+    sub_2 = list(single_recipe.values())[12]
+    session['sub_2'] = sub_2
+    voted_list = list(single_recipe.values())[13]
+    session['voted_list'] =  voted_list
+    upvotes = list(single_recipe.values())[14]
+    session['upvotes'] = upvotes
+    downvotes = list(single_recipe.values())[15]
+    session['downvotes'] = downvotes
     return render_template('show_single.html', single_recipe=single_recipe)
+
+@app.route('/upvote_recipe/', methods=['POST'])
+def upvote_recipe():
+    single_id = session.get('single_id')
+    voted_list = session.get('voted_list')
+    user = session.get('user')
+    voted_list = str(voted_list)
+    if user in voted_list:  
+        return render_template('already_voted.html')
+    else:
+        upvotes =  session.get('upvotes')
+        upvotes = int(upvotes)
+        upvotes = upvotes + 1
+        upvotes = str(upvotes)
+        voted_list = voted_list + user
+        recipes = mongo.db.recipes
+        recipes.update(
+                {'_id': ObjectId(single_id)},
+                {
+                    'creator': session['creator'],
+                    'name': session['name'], 
+                    'image': session['image'], 
+                    'description': session['description'],
+                    'key_ingredient_1': session['key_1'],
+                    'key_ingredient_2': session['key_2'],
+                    'key_ingredient_3': session['key_3'],
+                    'calories': session['calories'],
+                    'time': session['time'],
+                    'serves': session['serves'],
+                    'substitute_1': session['sub_1'],
+                    'substitute_2': session['sub_2'],
+                    'voted_list': voted_list,
+                    'upvotes': upvotes,
+                    'downvotes': session['downvotes']
+                })
+        return render_template('upvote.html')
+
+
+@app.route('/downvote_recipe/', methods=['POST'])
+def downvote_recipe():
+    single_id = session.get('single_id')
+    voted_list = session.get('voted_list')
+    user = session.get('user')
+    voted_list = str(voted_list)
+    if user in voted_list:  
+        return render_template('already_voted.html')
+    else:
+        downvotes =  session.get('downvotes')
+        downvotes = int(downvotes)
+        downvotes = downvotes + 1
+        downvotes = str(downvotes)
+        voted_list = voted_list + user
+        recipes = mongo.db.recipes
+        recipes.update(
+                {'_id': ObjectId(single_id)},
+                {
+                    'creator': session['creator'],
+                    'name': session['name'], 
+                    'image': session['image'], 
+                    'description': session['description'],
+                    'key_ingredient_1': session['key_1'],
+                    'key_ingredient_2': session['key_2'],
+                    'key_ingredient_3': session['key_3'],
+                    'calories': session['calories'],
+                    'time': session['time'],
+                    'serves': session['serves'],
+                    'substitute_1': session['sub_1'],
+                    'substitute_2': session['sub_2'],
+                    'voted_list': voted_list,
+                    'upvotes': session['upvotes'],
+                    'downvotes': downvotes
+                })
+        return render_template('downvote.html')
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
