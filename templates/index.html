@@ -1,3 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='img/falafel.jpg') }}" alt="Falafel" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>Tasty falafel</h3>
+        <p>Easy and satisfying veggie lunch!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/fish.jpg') }}" alt="Fish" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>Fish</h3>
+        <p>Delicious fish & chips!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/parsnip_soup.jpg') }}" alt="Parsnip Soup" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>Parsnips</h3>
+        <p>Spicy parsnip soup!</p>
+      </div>   
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
 {% endblock %}
