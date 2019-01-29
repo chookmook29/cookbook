@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 {% block title%}Single Recipe{% endblock %}
 {% block content %}
-<img src="{{ single_recipe.image }}" alt="Image">
-<h1>{{ single_recipe.name }}</1>
-<p>{{ single_recipe.key_ingredient_1 }}</p>
-<p>{{ single_recipe.key_ingredient_2 }}</p>
-<p>{{ single_recipe.key_ingredient_3 }}</p>
-<p>{{ single_recipe.description }}</p>
-<p>{{ single_recipe.calories }} kcal</p>
-<p>{{ single_recipe.time }} min</p>
-<p>{{ single_recipe.serves }}</p>
-<p>{{ single_recipe.substitute_1 }}</p>
-<p>{{ single_recipe.substitute_2 }}</p>
-<div>
-	<i class="far fa-thumbs-up"></i>{{ single_recipe.upvotes }}<i class="far fa-thumbs-down"></i>{{ single_recipe.downvotes }}
-</div>
-<form>
-	<button type='submit' name='action' class="btn btn-dark">Upvote</button>
-</form>
-<form action='{{url_for('downvote_recipe')}}' method="POST">
-	<button type='submit' name='action' class="btn btn-dark">Downvote</button>
-</form>
+	<img src="{{ single_recipe.image }}" alt="Image">
+	<h1>{{ single_recipe.name }}</1>
+	<p>{{ single_recipe.key_ingredient_1 }}</p>
+	<p>{{ single_recipe.key_ingredient_2 }}</p>
+	<p>{{ single_recipe.key_ingredient_3 }}</p>
+	<p>{{ single_recipe.description }}</p>
+	<p>{{ single_recipe.calories }} kcal</p>
+	<p>{{ single_recipe.time }} min</p>
+	<p>{{ single_recipe.serves }}</p>
+	<p>{{ single_recipe.substitute_1 }}</p>
+	<p>{{ single_recipe.substitute_2 }}</p>
+	<div>
+		<i class="far fa-thumbs-up"></i>{{ single_recipe.upvotes }}<i class="far fa-thumbs-down"></i>{{ single_recipe.downvotes }}
+	</div>
+{% if 'user' in session %}
+	<form action='{{url_for('upvote_recipe')}}' method="POST">
+		<button type='submit' name='action' class="btn btn-dark">Upvote</button>
+	</form>
+	<form action='{{url_for('downvote_recipe')}}' method="POST">
+		<button type='submit' name='action' class="btn btn-dark">Downvote</button>
+	</form>
+{% else %}
+	<p>Register to vote!</p>
+{% endif %}
 {% endblock %}
