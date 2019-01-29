@@ -1,28 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action='{{url_for('update_recipe')}}' method="POST">
-	<label for='name'>Recipe name</label>
-	<input type='text' name='name' class="form-control" value="{{ single_edit.name }}" required>
-	<label for='image'>Image URL</label>
-	<input type='text' name='image' class="form-control" value="{{ single_edit.image }}" required>
-	<label for='description'>Description</label>
-	<textarea name='description' class="form-control" required>{{ single_edit.description }}</textarea>
-	<label for='key_ingredient_1'>Key ingredient</label>
-	<input type='text' name='key_ingredient_1' class="form-control" value="{{ single_edit.key_ingredient_1 }}" required>
-	<label for='key_ingredient_2'>Key ingredient</label>
-	<input type='text' name='key_ingredient_2' class="form-control" value="{{ single_edit.key_ingredient_2 }}">
-	<label for='key_ingredient_3'>Key ingredient</label>
-	<input type='text' name='key_ingredient_3' class="form-control" value="{{ single_edit.key_ingredient_3 }}">
-	<label for='calories'>Calories</label>
-	<input type='text' name='calories' class="form-control" value="{{ single_edit.calories }}" required>
-	<label for='time'>Time (in minutes)</label>
-	<input type='text' name='time' class="form-control" value="{{ single_edit.time }}" required>
-	<label for='serves'>Serves</label>
-	<input type='text' name='serves' class="form-control" value="{{ single_edit.serves}}" required>
-	<label for='substitute_1'>Subsitute ingredient</label>
-	<input type='text' name='substitute_1' class="form-control" value="{{ single_edit.substitute_1 }}">
-	<label for='substitute_2'>Subsitute ingredient</label>
-	<input type='text' name='substitute_2' class="form-control" value="{{ single_edit.substitute_2 }}">
-	<button type='submit' name='action' class="btn btn-dark">Update</button>
-</form>
+	<div class='container'>
+		<form action='{{url_for('update_recipe')}}' method="POST">
+			<label for='name'>Recipe name</label>
+			<input type='text' name='name' class="form-control" value="{{ single_edit.name }}" required>
+			<label for='image'>Image URL</label>
+			<input type='text' name='image' class="form-control" value="{{ single_edit.image }}" required>
+			<label for='description'>Description</label>
+			<textarea name='description' class="form-control" required>{{ single_edit.description }}</textarea>
+			<label for='key_ingredient_1'>Key ingredient</label>
+			<input type='text' name='key_ingredient_1' class="form-control" value="{{ single_edit.key_ingredient_1 }}" required>
+			<label for='key_ingredient_2'>Key ingredient</label>
+			<input type='text' name='key_ingredient_2' class="form-control" value="{{ single_edit.key_ingredient_2 }}">
+			<label for='key_ingredient_3'>Key ingredient</label>
+			<input type='text' name='key_ingredient_3' class="form-control" value="{{ single_edit.key_ingredient_3 }}">
+			<label for='calories'>Calories</label>
+			<input type='text' name='calories' class="form-control" value="{{ single_edit.calories }}" required>
+			<label for='time'>Time (in minutes)</label>
+			<input type='text' name='time' class="form-control" value="{{ single_edit.time }}" required>
+			<label for='serves'>Serves</label>
+			<input type='text' name='serves' class="form-control" value="{{ single_edit.serves}}" required>
+			<label for='substitute_1'>Subsitute ingredient</label>
+			<input type='text' name='substitute_1' class="form-control" value="{{ single_edit.substitute_1 }}">
+			<label for='substitute_2'>Subsitute ingredient</label>
+			<input type='text' name='substitute_2' class="form-control" value="{{ single_edit.substitute_2 }}">
+			<button type='submit' name='action' class="btn btn-dark">Update</button>
+		</form>
+	</div>
 {% endblock %}
