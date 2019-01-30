@@ -69,6 +69,12 @@ def add_recipe():
             'upvotes': "0",
             'downvotes': "0"
             })
+        key_ingredient = mongo.db.ingredients
+        check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_1'].lower()})
+        if check_ingredient is None:
+                    key_ingredient.insert({
+                    'key_ingredient': request.form.get('key_ingredient_1').lower()
+                    })
         return redirect(url_for('my_recipes'))
     return render_template('add.html')
 
