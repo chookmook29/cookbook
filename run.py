@@ -226,6 +226,10 @@ def downvote_recipe():
                     'downvotes': downvotes
                 })
         return render_template('downvote.html')
+
+@app.route('/by_ingredient/')
+def by_ingredient():
+    return render_template('ingredient.html', ingredients=mongo.db.ingredients.find())
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
