@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title%}Add Recipe{% endblock %}
 {% block content %}
-{% for ingredient in ingredients %}
-	<p>{{ ingredient.key_ingredient }}</p>
+{% for ingredient in key_ingredient %}
+	<a href="{{ url_for('ingredient_recipes', key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
 {% endfor %}
 {% endblock %}

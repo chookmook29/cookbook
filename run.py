@@ -6,8 +6,8 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 app.secret_key = ']Nk(`K24HLRuRkdN'
 
-app.config["MONGO_DBNAME"] = 'cookbook'
-app.config["MONGO_URI"] = 'mongodb://admin:hadvjecbscW2vm4m@ds157834.mlab.com:57834/cookbook'
+app.config['MONGO_DBNAME'] = 'cookbook'
+app.config['MONGO_URI'] = 'mongodb://admin:hadvjecbscW2vm4m@ds157834.mlab.com:57834/cookbook'
 
 mongo = PyMongo(app)
 
@@ -65,9 +65,9 @@ def add_recipe():
             'serves': request.form['serves'],
             'substitute_1': request.form['substitute_1'],
             'substitute_2': request.form['substitute_2'],
-            'voted_list': "",
-            'upvotes': "0",
-            'downvotes': "0"
+            'voted_list': '',
+            'upvotes': '0',
+            'downvotes': '0'
             })
         key_ingredient = mongo.db.ingredients
         check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_1'].lower()})
@@ -79,13 +79,13 @@ def add_recipe():
 @app.route('/my_recipes/')
 def my_recipes():
     user = session.get('user')
-    my_recipes = mongo.db.recipes.find({"creator": session['user']})
+    my_recipes = mongo.db.recipes.find({'creator': session['user']})
     return render_template('my.html', my_recipes=my_recipes, user=user)
 
 @app.route('/edit_recipe/<edit_id>')
 def edit_recipe(edit_id):
     session['edit_id'] = edit_id
-    single_edit = mongo.db.recipes.find_one({"_id": ObjectId(edit_id)})
+    single_edit = mongo.db.recipes.find_one({'_id': ObjectId(edit_id)})
     return render_template('edit.html', single_edit=single_edit)
 
 @app.route('/update_recipe/', methods=['POST'])
@@ -107,20 +107,20 @@ def update_recipe():
                 'serves': request.form['serves'],
                 'substitute_1': request.form['substitute_1'],
                 'substitute_2': request.form['substitute_2'],
-                'voted_list': "",
-                'upvotes': "0",
-                'downvotes': "0"
+                'voted_list': '',
+                'upvotes': '0',
+                'downvotes': '0'
             })
     return render_template('update.html')
 
 @app.route('/delete/<delete_id>')
 def delete_recipe(delete_id):
-    single_delete = mongo.db.recipes.remove({"_id": ObjectId(delete_id)})
+    single_delete = mongo.db.recipes.remove({'_id': ObjectId(delete_id)})
     return render_template('delete.html', single_delete=single_delete)
 
 @app.route('/show_single/<single_id>')
 def show_single(single_id):
-    single_recipe = mongo.db.recipes.find_one({"_id": ObjectId(single_id)})
+    single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)})
     session['single_id'] = single_id
     creator = list(single_recipe.values())[1]
     session['creator'] = creator
@@ -229,7 +229,12 @@ def downvote_recipe():
 
 @app.route('/by_ingredient/')
 def by_ingredient():
-    return render_template('ingredient.html', ingredients=mongo.db.ingredients.find())
+    return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find())
+
+@app.route('/ingredient_recipes/<key_ingredient>')
+def ingredient_recipes(key_ingredient):
+    recipes_total = mongo.db.recipes.find({'key_ingredient_1': key_ingredient}).count()
+    return render_template('single_ingredient.html', recipes=mongo.db.recipes.find({'key_ingredient_1': key_ingredient}), recipes_total=recipes_total)
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
