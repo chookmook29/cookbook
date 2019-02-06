@@ -28,3 +28,6 @@ p {
 .row {
   margin-left: 0px;
 }
+.custom-container {
+  background-color: #2d2d2d;
+}

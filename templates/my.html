@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block title%}My recipes{% endblock %}
 {% block content %}
-{% for recipe in my_recipes %}
-	<div>
-		<a href="{{url_for('show_single', single_id=recipe._id, image=recipe.image, description=recipe.description, key_1=recipe.key_ingredient_1, key_2=recipe.key_ingredient_2, kley_3=recipe.key_ingredient_3, calories=recipe.calories, time=recipe.time, serves=recipe.serves, sub_1=recipe.substitute_1, sub_2=recipe.substitute_2, voted_list=recipe.voted_list, upvotes=recipe.upvotes, downvotes=recipe.downvotes)}}">{{recipe.name}}</a>
-		<a href="{{url_for('edit_recipe', edit_id=recipe._id)}}">Edit Recipe</a>
-		<a href="{{url_for('delete_recipe', delete_id=recipe._id)}}">Delete Recipe</a>
+	<div class="custom-container">
+		{% for recipe in my_recipes %}
+			<div>
+				<a href="{{url_for('show_single', single_id=recipe._id, image=recipe.image, description=recipe.description, key_1=recipe.key_ingredient_1, key_2=recipe.key_ingredient_2, kley_3=recipe.key_ingredient_3, calories=recipe.calories, time=recipe.time, serves=recipe.serves, sub_1=recipe.substitute_1, sub_2=recipe.substitute_2, voted_list=recipe.voted_list, upvotes=recipe.upvotes, downvotes=recipe.downvotes)}}">{{recipe.name}}</a>
+				<a href="{{url_for('edit_recipe', edit_id=recipe._id)}}">Edit Recipe</a>
+				<a href="{{url_for('delete_recipe', delete_id=recipe._id)}}">Delete Recipe</a>
+			</div>
+		{% endfor %}
 	</div>
-{% endfor %}
 {% endblock %}
