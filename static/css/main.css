@@ -1,3 +1,21 @@
+@media screen and (max-width: 575px) and (orientation: portrait){
+}
+@media screen and (min-width: 576px) and (orientation: landscape){
+}
+@media screen and (min-width: 576px) and (orientation: portrait){
+}
+@media screen and (min-width: 768px) and (orientation: landscape){
+}
+@media screen and (min-width: 768px) and (orientation: portrait){
+}
+@media screen and (min-width: 1024px) and (orientation: landscape){
+}
+@media screen and (min-width: 1024px) and (orientation: portrait){
+}
+@media screen and (min-width: 1200px) and (orientation: landscape){
+}
+@media screen and (min-width: 1200px) and (orientation: portrait){
+}
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
