@@ -49,3 +49,7 @@ p {
 .custom-container {
   background-color: #2d2d2d;
 }
+a {
+	color: black;
+	text-decoration: underline;
+}
