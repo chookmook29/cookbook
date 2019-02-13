@@ -3,16 +3,14 @@
 {% block content %}
 	<div class="container">
 		<img src="{{ single_recipe.image }}" alt="Image">
-		<h1>{{ single_recipe.name }}</1>
-		<p>{{ single_recipe.key_ingredient_1 }}</p>
-		<p>{{ single_recipe.key_ingredient_2 }}</p>
-		<p>{{ single_recipe.key_ingredient_3 }}</p>
+		<h2>{{ single_recipe.name }}</h2>
+		<p>{{ single_recipe.key_ingredient_1 }}, {{ single_recipe.key_ingredient_2 }}, {{ single_recipe.key_ingredient_3 }}</p>
 		<p>{{ single_recipe.description }}</p>
-		<p>{{ single_recipe.calories }} kcal</p>
-		<p>{{ single_recipe.time }} min</p>
-		<p>{{ single_recipe.serves }}</p>
-		<p>{{ single_recipe.substitute_1 }}</p>
-		<p>{{ single_recipe.substitute_2 }}</p>
+		<p>Calories: {{ single_recipe.calories }} kcal</p>
+		<p>Time: {{ single_recipe.time }} min</p>
+		<p>Serves: {{ single_recipe.serves }}</p>
+		<p>Substitute ingredient: {{ single_recipe.substitute_1 }}</p>
+		<p>Another substitute: {{ single_recipe.substitute_2 }}</p>
 	<div>
 		<i class="far fa-thumbs-up"></i>{{ single_recipe.upvotes }}<i class="far fa-thumbs-down"></i>{{ single_recipe.downvotes }}
 	</div>
