@@ -234,7 +234,7 @@ def by_ingredient():
 @app.route('/ingredient_recipes/<key_ingredient>')
 def ingredient_recipes(key_ingredient):
     recipes_total = mongo.db.recipes.find({'key_ingredient_1': key_ingredient}).count()
-    return render_template('single_ingredient.html', recipes=mongo.db.recipes.find({'key_ingredient_1': key_ingredient}), recipes_total=recipes_total)
+    return render_template('single_ingredient.html', recipes=mongo.db.recipes.find({'key_ingredient_1': key_ingredient}), recipes_total=recipes_total, key_ingredient=key_ingredient)
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
