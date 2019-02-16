@@ -31,7 +31,7 @@ def sign_in():
         users = mongo.db.users
         user_found = users.find_one({'user': request.form['user']})
         if user_found:
-            if (user_found['password'], request.form['password']):
+            if (user_found['password'] == request.form['password']):
                 session['user'] = request.form['user']
                 return redirect(url_for('index'))
             return render_template('sign_in.html')
