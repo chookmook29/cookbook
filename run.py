@@ -22,6 +22,7 @@ def register():
         user = request.form['user']
         password = request.form['password']
         users.insert({'user': user, 'password': password})
+        session['user'] = request.form['user']
         return redirect(url_for('index'))
     return render_template('register.html')
 
