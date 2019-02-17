@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, url_for, session, redirect
+from flask import Flask, render_template, request, url_for, session, redirect, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -34,6 +34,7 @@ def sign_in():
         if user_found:
             if (user_found['password'] == request.form['password']):
                 session['user'] = request.form['user']
+                flash('You were successfully logged in')
                 return redirect(url_for('index'))
             return render_template('sign_in.html')
         return render_template('sign_in.html')
