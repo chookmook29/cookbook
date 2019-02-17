@@ -155,8 +155,8 @@ def show_single(single_id):
     session['downvotes'] = downvotes
     return render_template('show_single.html', single_recipe=single_recipe)
 
-@app.route('/upvote_recipe/', methods=['POST'])
-def upvote_recipe():
+@app.route('/upvote_recipe/<single_id>')
+def upvote_recipe(single_id):
     single_id = session.get('single_id')
     voted_list = session.get('voted_list')
     user = session.get('user')
@@ -189,11 +189,11 @@ def upvote_recipe():
                     'upvotes': upvotes,
                     'downvotes': session['downvotes']
                 })
-        return render_template('show_single.html')
+        return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
 
 
-@app.route('/downvote_recipe/', methods=['POST'])
-def downvote_recipe():
+@app.route('/downvote_recipe/<single_id>')
+def downvote_recipe(single_id):
     single_id = session.get('single_id')
     voted_list = session.get('voted_list')
     user = session.get('user')
@@ -226,7 +226,7 @@ def downvote_recipe():
                     'upvotes': session['upvotes'],
                     'downvotes': downvotes
                 })
-        return render_template('show_single.html')
+        return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
 
 @app.route('/by_ingredient/')
 def by_ingredient():

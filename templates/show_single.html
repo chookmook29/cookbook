@@ -15,12 +15,8 @@
 		<i class="far fa-thumbs-up fa-2x"></i>{{ single_recipe.upvotes }}<i class="far fa-thumbs-down fa-2x"></i>{{ single_recipe.downvotes }}
 	</div>
 	{% if 'user' in session %}
-		<form action='{{url_for('upvote_recipe')}}' method="POST">
-			<button type='submit' name='action' class="btn btn-dark">Upvote</button>
-		</form>
-		<form action='{{url_for('downvote_recipe')}}' method="POST">
-			<button type='submit' name='action' class="btn btn-dark">Downvote</button>
-		</form>
+		<a href="{{url_for('upvote_recipe', single_id=single_recipe._id)}}">Upvote</a>
+		<a href="{{url_for('downvote_recipe', single_id=single_recipe._id)}}">Downvote</a>		
 	{% else %}
 		<p>Register to vote!</p>
 	{% endif %}
