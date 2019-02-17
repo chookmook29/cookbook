@@ -11,13 +11,17 @@
 		<p>Serves: {{ single_recipe.serves }}</p>
 		<p>Substitute ingredient: {{ single_recipe.substitute_1 }}</p>
 		<p>Another substitute: {{ single_recipe.substitute_2 }}</p>
-	<div>
-		<i class="far fa-thumbs-up fa-2x"></i>{{ single_recipe.upvotes }}<i class="far fa-thumbs-down fa-2x"></i>{{ single_recipe.downvotes }}
-	</div>
+	
 	{% if 'user' in session %}
-		<a href="{{url_for('upvote_recipe', single_id=single_recipe._id)}}">Upvote</a>
-		<a href="{{url_for('downvote_recipe', single_id=single_recipe._id)}}">Downvote</a>		
+		<div>
+			<a href="{{url_for('upvote_recipe', single_id=single_recipe._id)}}"><i class="far fa-thumbs-up fa-3x"></i>{{ single_recipe.upvotes }}</a>
+			<a href="{{url_for('downvote_recipe', single_id=single_recipe._id)}}"><i class="far fa-thumbs-down fa-3x"></i>{{ single_recipe.downvotes }}</a>	
+		</div>	
 	{% else %}
+		<div>
+			<i class="far fa-thumbs-up fa-3x"></i>{{ single_recipe.upvotes }}
+			<i class="far fa-thumbs-down fa-3x"></i>{{ single_recipe.downvotes }}
+		</div>
 		<p>Register to vote!</p>
 	{% endif %}
 	</div>
