@@ -189,7 +189,7 @@ def upvote_recipe():
                     'upvotes': upvotes,
                     'downvotes': session['downvotes']
                 })
-        return render_template('upvote.html')
+        return render_template('show_single.html')
 
 
 @app.route('/downvote_recipe/', methods=['POST'])
@@ -226,7 +226,7 @@ def downvote_recipe():
                     'upvotes': session['upvotes'],
                     'downvotes': downvotes
                 })
-        return render_template('downvote.html')
+        return render_template('show_single.html')
 
 @app.route('/by_ingredient/')
 def by_ingredient():
