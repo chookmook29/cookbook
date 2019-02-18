@@ -67,7 +67,8 @@ def add_recipe():
             'serves': request.form['serves'],
             'substitute_1': request.form['substitute_1'],
             'substitute_2': request.form['substitute_2'],
-            'voted_list': '',
+            'voted_up': '',
+            'voted_down': '',
             'upvotes': '0',
             'downvotes': '0'
             })
@@ -109,7 +110,8 @@ def update_recipe():
                 'serves': request.form['serves'],
                 'substitute_1': request.form['substitute_1'],
                 'substitute_2': request.form['substitute_2'],
-                'voted_list': '',
+                'voted_up': '',
+                'voted_down': '',
                 'upvotes': '0',
                 'downvotes': '0'
             })
@@ -148,28 +150,31 @@ def show_single(single_id):
     session['sub_1'] = sub_1
     sub_2 = list(single_recipe.values())[12]
     session['sub_2'] = sub_2
-    voted_list = list(single_recipe.values())[13]
-    session['voted_list'] =  voted_list
-    upvotes = list(single_recipe.values())[14]
+    voted_up = list(single_recipe.values())[13]
+    session['voted_up'] =  voted_up
+    voted_down = list(single_recipe.values())[14]
+    session['voted_down'] =  voted_down
+    upvotes = list(single_recipe.values())[15]
     session['upvotes'] = upvotes
-    downvotes = list(single_recipe.values())[15]
+    downvotes = list(single_recipe.values())[16]
     session['downvotes'] = downvotes
     return render_template('show_single.html', single_recipe=single_recipe)
 
 @app.route('/upvote_recipe/<single_id>')
 def upvote_recipe(single_id):
     single_id = session.get('single_id')
-    voted_list = session.get('voted_list')
+    voted_up = session.get('voted_up')
+    voted_down = session.get('voted_down')
     user = session.get('user')
-    voted_list = str(voted_list)
-    if user in voted_list:  
-        return render_template('already_voted.html')
+    voted_up = str(voted_up)
+    if user in voted_up:  
+        return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
     else:
         upvotes =  session.get('upvotes')
         upvotes = int(upvotes)
         upvotes = upvotes + 1
         upvotes = str(upvotes)
-        voted_list = voted_list + user
+        voted_up = voted_up + user
         recipes = mongo.db.recipes
         recipes.update(
                 {'_id': ObjectId(single_id)},
@@ -186,7 +191,8 @@ def upvote_recipe(single_id):
                     'serves': session['serves'],
                     'substitute_1': session['sub_1'],
                     'substitute_2': session['sub_2'],
-                    'voted_list': voted_list,
+                    'voted_up': voted_up,
+                    'voted_down': voted_down,
                     'upvotes': upvotes,
                     'downvotes': session['downvotes']
                 })
@@ -196,17 +202,18 @@ def upvote_recipe(single_id):
 @app.route('/downvote_recipe/<single_id>')
 def downvote_recipe(single_id):
     single_id = session.get('single_id')
-    voted_list = session.get('voted_list')
+    voted_down = session.get('voted_down')
+    voted_up = session.get('voted_up')
     user = session.get('user')
-    voted_list = str(voted_list)
-    if user in voted_list:  
-        return render_template('already_voted.html')
+    voted_down = str(voted_down)
+    if user in voted_down:  
+        return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
     else:
         downvotes =  session.get('downvotes')
         downvotes = int(downvotes)
         downvotes = downvotes + 1
         downvotes = str(downvotes)
-        voted_list = voted_list + user
+        voted_down = voted_down + user
         recipes = mongo.db.recipes
         recipes.update(
                 {'_id': ObjectId(single_id)},
@@ -223,7 +230,8 @@ def downvote_recipe(single_id):
                     'serves': session['serves'],
                     'substitute_1': session['sub_1'],
                     'substitute_2': session['sub_2'],
-                    'voted_list': voted_list,
+                    'voted_up': voted_up,
+                    'voted_down': voted_down,
                     'upvotes': session['upvotes'],
                     'downvotes': downvotes
                 })
