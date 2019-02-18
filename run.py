@@ -165,16 +165,55 @@ def upvote_recipe(single_id):
     single_id = session.get('single_id')
     voted_up = session.get('voted_up')
     voted_down = session.get('voted_down')
+    downvotes =  session.get('downvotes')
+    upvotes =  session.get('upvotes')
     user = session.get('user')
     voted_up = str(voted_up)
+    voted_down = str(voted_down)
     if user in voted_up:  
         return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
-    else:
-        upvotes =  session.get('upvotes')
+    elif user in voted_down:  
+        downvotes = int(downvotes)
+        downvotes = downvotes - 1
+        downvotes = str(downvotes)
+        voted_down = voted_down.replace(user, "")
         upvotes = int(upvotes)
         upvotes = upvotes + 1
         upvotes = str(upvotes)
         voted_up = voted_up + user
+        session['voted_up'] =  voted_up
+        session['voted_down'] =  voted_down
+        session['upvotes'] = upvotes
+        session['downvotes'] = downvotes
+        recipes = mongo.db.recipes
+        recipes.update(
+                {'_id': ObjectId(single_id)},
+                {
+                    'creator': session['creator'],
+                    'name': session['name'], 
+                    'image': session['image'], 
+                    'description': session['description'],
+                    'key_ingredient_1': session['key_1'],
+                    'key_ingredient_2': session['key_2'],
+                    'key_ingredient_3': session['key_3'],
+                    'calories': session['calories'],
+                    'time': session['time'],
+                    'serves': session['serves'],
+                    'substitute_1': session['sub_1'],
+                    'substitute_2': session['sub_2'],
+                    'voted_up': voted_up,
+                    'voted_down': voted_down,
+                    'upvotes': upvotes,
+                    'downvotes': downvotes
+                })  
+        return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
+    else:
+        upvotes = int(upvotes)
+        upvotes = upvotes + 1
+        upvotes = str(upvotes)
+        voted_up = voted_up + user
+        session['voted_up'] =  voted_up
+        session['upvotes'] = upvotes
         recipes = mongo.db.recipes
         recipes.update(
                 {'_id': ObjectId(single_id)},
@@ -204,16 +243,55 @@ def downvote_recipe(single_id):
     single_id = session.get('single_id')
     voted_down = session.get('voted_down')
     voted_up = session.get('voted_up')
+    downvotes =  session.get('downvotes')
+    upvotes =  session.get('upvotes')
     user = session.get('user')
     voted_down = str(voted_down)
+    voted_up = str(voted_up)
     if user in voted_down:  
         return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
-    else:
-        downvotes =  session.get('downvotes')
+    elif user in voted_up:
         downvotes = int(downvotes)
         downvotes = downvotes + 1
         downvotes = str(downvotes)
         voted_down = voted_down + user
+        upvotes = int(upvotes)
+        upvotes = upvotes - 1
+        upvotes = str(upvotes)
+        voted_up = voted_up.replace(user, "")
+        session['voted_up'] =  voted_up
+        session['voted_down'] =  voted_down
+        session['upvotes'] = upvotes
+        session['downvotes'] = downvotes
+        recipes = mongo.db.recipes
+        recipes.update(
+                {'_id': ObjectId(single_id)},
+                {
+                    'creator': session['creator'],
+                    'name': session['name'], 
+                    'image': session['image'], 
+                    'description': session['description'],
+                    'key_ingredient_1': session['key_1'],
+                    'key_ingredient_2': session['key_2'],
+                    'key_ingredient_3': session['key_3'],
+                    'calories': session['calories'],
+                    'time': session['time'],
+                    'serves': session['serves'],
+                    'substitute_1': session['sub_1'],
+                    'substitute_2': session['sub_2'],
+                    'voted_up': voted_up,
+                    'voted_down': voted_down,
+                    'upvotes': upvotes,
+                    'downvotes': downvotes
+                })  
+        return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
+    else:
+        downvotes = int(downvotes)
+        downvotes = downvotes + 1
+        downvotes = str(downvotes)
+        voted_down = voted_down + user
+        session['voted_down'] =  voted_down
+        session['downvotes'] = downvotes
         recipes = mongo.db.recipes
         recipes.update(
                 {'_id': ObjectId(single_id)},

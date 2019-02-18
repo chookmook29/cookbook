@@ -56,3 +56,9 @@ a {
 .signin {
   margin-top: 20%;
 }
+.fa-thumbs-up {
+  color: green;
+}
+.fa-thumbs-down {
+  color: red;
+}
