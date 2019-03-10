@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, url_for, session, redirect, f
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import boto3, botocore
+import json
 
 app = Flask(__name__)
 app.secret_key = ']Nk(`K24HLRuRkdN'
@@ -343,7 +344,17 @@ def downvote_recipe(single_id):
 
 @app.route('/by_ingredient/')
 def by_ingredient():
-    return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find())
+    ingredient_dictionary = {}
+    ingredient_list = []
+    counted_ingredients = {}
+    for x in mongo.db.ingredients.find({},{ "_id": 0, "key_ingredient": 1}):
+        y = x['key_ingredient']
+        ingredient_list.append(y)
+    for n in ingredient_list:
+        m = mongo.db.recipes.find({"key_ingredient_1" : n}).count()
+        counted_ingredients[n] = m 
+    json_string = json.dumps(counted_ingredients)
+    return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find(), ingredient_list = ingredient_list, counted_ingredients=counted_ingredients)
 
 @app.route('/ingredient_recipes/<key_ingredient>')
 def ingredient_recipes(key_ingredient):
