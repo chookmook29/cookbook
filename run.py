@@ -2,12 +2,36 @@ import os
 from flask import Flask, render_template, request, url_for, session, redirect, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+import boto3, botocore
 
 app = Flask(__name__)
 app.secret_key = ']Nk(`K24HLRuRkdN'
 
 app.config['MONGO_DBNAME'] = 'cookbook'
 app.config['MONGO_URI'] = 'mongodb://admin:hadvjecbscW2vm4m@ds157834.mlab.com:57834/cookbook'
+S3_BUCKET = 'uploadscookbook'
+S3_KEY = ''
+S3_SECRET = ''
+S3_LOCATION = 'http://uploadscookbook.s3.amazonaws.com/'
+
+s3 = boto3.client(
+   "s3",
+   aws_access_key_id=S3_KEY,
+   aws_secret_access_key=S3_SECRET
+)
+
+def upload_file_to_s3(file, bucket_name, acl="public-read"):
+    try:
+
+        s3.upload_fileobj(
+            file,
+            bucket_name,
+            file.filename,
+        )
+    except Exception as e:
+        return e
+
+    return "{}{}".format(S3_LOCATION, file.filename)
 
 mongo = PyMongo(app)
 
@@ -53,11 +77,13 @@ def show_all():
 @app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
     if request.method == 'POST':
+        file = request.files["image"]
+        output = upload_file_to_s3(file, S3_BUCKET)
         recipes = mongo.db.recipes
         recipes.insert({
             'creator': session['user'],
             'name': request.form['name'], 
-            'image': request.form['image'], 
+            'image': output, 
             'description': request.form['description'],
             'key_ingredient_1': request.form['key_ingredient_1'],
             'key_ingredient_2': request.form['key_ingredient_2'],

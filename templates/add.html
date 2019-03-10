@@ -2,11 +2,13 @@
 {% block title%}Add Recipe{% endblock %}
 {% block content %}
 	<div class='container'>
-		<form action='{{url_for('add_recipe')}}' method="POST">
+		<form action='{{url_for('add_recipe')}}' method="POST" enctype="multipart/form-data">
 			<label for='name'>Recipe name</label>
 			<input type='text' name='name' class="form-control" required>
-			<label for='image'>Image URL</label>
-			<input type='text' name='image' class="form-control" required>
+			<label for="image">Upload Your File</label>
+        	<br></br>
+        	<input type="file" name="image" required>
+        	<br></br>
 			<label for='description'>Description</label>
 			<textarea name='description' class="form-control" rows="6" required></textarea>
 			<label for='key_ingredient_1'>Key ingredient</label>
