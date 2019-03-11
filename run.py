@@ -354,7 +354,7 @@ def by_ingredient():
         m = mongo.db.recipes.find({"key_ingredient_1" : n}).count()
         counted_ingredients[n] = m 
     json_string = json.dumps(counted_ingredients)
-    return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find(), ingredient_list = ingredient_list, counted_ingredients=counted_ingredients)
+    return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find(), counted_ingredients=counted_ingredients)
 
 @app.route('/ingredient_recipes/<key_ingredient>')
 def ingredient_recipes(key_ingredient):
