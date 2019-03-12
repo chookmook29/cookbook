@@ -80,15 +80,21 @@ def add_recipe():
     if request.method == 'POST':
         file = request.files["image"]
         output = upload_file_to_s3(file, S3_BUCKET)
+        key_ingredient_1 = request.form['key_ingredient_1']
+        key_ingredient_2 = request.form['key_ingredient_2']
+        key_ingredient_3 = request.form['key_ingredient_3']
+        key_ingredient_1 = key_ingredient_1.lower()
+        key_ingredient_2 = key_ingredient_2.lower()
+        key_ingredient_3 = key_ingredient_3.lower()
         recipes = mongo.db.recipes
         recipes.insert({
             'creator': session['user'],
             'name': request.form['name'], 
             'image': output, 
             'description': request.form['description'],
-            'key_ingredient_1': request.form['key_ingredient_1'],
-            'key_ingredient_2': request.form['key_ingredient_2'],
-            'key_ingredient_3': request.form['key_ingredient_3'],
+            'key_ingredient_1': key_ingredient_1,
+            'key_ingredient_2': key_ingredient_2,
+            'key_ingredient_3': key_ingredient_3,
             'calories': request.form['calories'],
             'time': request.form['time'],
             'serves': request.form['serves'],
@@ -122,6 +128,12 @@ def edit_recipe(edit_id):
 def update_recipe():
     edit_id = session.get('edit_id')
     recipes = mongo.db.recipes
+    key_ingredient_1 = request.form['key_ingredient_1']
+    key_ingredient_2 = request.form['key_ingredient_2']
+    key_ingredient_3 = request.form['key_ingredient_3']
+    key_ingredient_1 = key_ingredient_1.lower()
+    key_ingredient_2 = key_ingredient_2.lower()
+    key_ingredient_3 = key_ingredient_3.lower()
     recipes.update(
             {'_id': ObjectId(edit_id)},
             {
@@ -129,9 +141,9 @@ def update_recipe():
                 'name': request.form['name'], 
                 'image': request.form['image'], 
                 'description': request.form['description'],
-                'key_ingredient_1': request.form['key_ingredient_1'],
-                'key_ingredient_2': request.form['key_ingredient_2'],
-                'key_ingredient_3': request.form['key_ingredient_3'],
+                'key_ingredient_1': key_ingredient_1,
+                'key_ingredient_2': key_ingredient_2,
+                'key_ingredient_3': key_ingredient_3,
                 'calories': request.form['calories'],
                 'time': request.form['time'],
                 'serves': request.form['serves'],
