@@ -1,29 +1,31 @@
 {% extends 'base.html' %}
 {% block title%}Add Recipe{% endblock %}
 {% block content %}
-<script>
-	var w = 300,                        
-    h = 300,                           
-    r = 100,                            
-    color = d3.scale.category20c();     
-    data = [{% for key, value in counted_ingredients.items() %}
+<div id="chart"></div>
+<script type="text/javascript">
+	var w = 300;                        
+    var h = 300;                           
+    var r = h/2;                            
+    var color = d3.scale.category20c();     
+    var data = [{% for key, value in counted_ingredients.items() %}
     	{"label":"{{key}}", "value":{{value}}},
     	{% endfor %}];
     
-    var vis = d3.select("body")
+    var vis = d3.select("#chart")
         .append("svg:svg")              
         .data([data])                   
             .attr("width", w)           
             .attr("height", h)
         .append("svg:g")                
-            .attr("transform", "translate(" + r + "," + r + ")")    
+            .attr("transform", "translate(" + r + "," + r + ")")  
+    
+    var pie = d3.layout.pie().value(function(d){return d.value;});  
 
+    // declare an arc generator function
     var arc = d3.svg.arc()              
         .outerRadius(r);
-
-    var pie = d3.layout.pie()           
-        .value(function(d) { return d.value; });    
-
+ 
+    // select paths, use arc generator to draw
     var arcs = vis.selectAll("g.slice")     
         .data(pie)                           
         .enter()                           
