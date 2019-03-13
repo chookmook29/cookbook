@@ -80,21 +80,15 @@ def add_recipe():
     if request.method == 'POST':
         file = request.files["image"]
         output = upload_file_to_s3(file, S3_BUCKET)
-        key_ingredient_1 = request.form['key_ingredient_1']
-        key_ingredient_2 = request.form['key_ingredient_2']
-        key_ingredient_3 = request.form['key_ingredient_3']
-        key_ingredient_1 = key_ingredient_1.lower()
-        key_ingredient_2 = key_ingredient_2.lower()
-        key_ingredient_3 = key_ingredient_3.lower()
         recipes = mongo.db.recipes
         recipes.insert({
             'creator': session['user'],
             'name': request.form['name'], 
             'image': output, 
             'description': request.form['description'],
-            'key_ingredient_1': key_ingredient_1,
-            'key_ingredient_2': key_ingredient_2,
-            'key_ingredient_3': key_ingredient_3,
+            'key_ingredient_1': request.form['key_ingredient_1'].lower(),
+            'key_ingredient_2': request.form['key_ingredient_2'].lower(),
+            'key_ingredient_3': request.form['key_ingredient_3'].lower(),
             'calories': request.form['calories'],
             'time': request.form['time'],
             'serves': request.form['serves'],
@@ -108,7 +102,13 @@ def add_recipe():
         key_ingredient = mongo.db.ingredients
         check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_1'].lower()})
         if check_ingredient is None:
-                    key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_1').lower()})
+            key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_1').lower()})
+        check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_2'].lower()})
+        if check_ingredient is None:
+            key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_2').lower()})
+        check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_3'].lower()})
+        if check_ingredient is None:
+            key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_3').lower()})
         return redirect(url_for('my_recipes'))
     return render_template('add.html')
 
@@ -128,12 +128,6 @@ def edit_recipe(edit_id):
 def update_recipe():
     edit_id = session.get('edit_id')
     recipes = mongo.db.recipes
-    key_ingredient_1 = request.form['key_ingredient_1']
-    key_ingredient_2 = request.form['key_ingredient_2']
-    key_ingredient_3 = request.form['key_ingredient_3']
-    key_ingredient_1 = key_ingredient_1.lower()
-    key_ingredient_2 = key_ingredient_2.lower()
-    key_ingredient_3 = key_ingredient_3.lower()
     recipes.update(
             {'_id': ObjectId(edit_id)},
             {
@@ -141,9 +135,9 @@ def update_recipe():
                 'name': request.form['name'], 
                 'image': request.form['image'], 
                 'description': request.form['description'],
-                'key_ingredient_1': key_ingredient_1,
-                'key_ingredient_2': key_ingredient_2,
-                'key_ingredient_3': key_ingredient_3,
+                'key_ingredient_1': request.form['key_ingredient_1'].lower(),
+                'key_ingredient_2': request.form['key_ingredient_2'].lower(),
+                'key_ingredient_3': request.form['key_ingredient_3'].lower(),
                 'calories': request.form['calories'],
                 'time': request.form['time'],
                 'serves': request.form['serves'],
@@ -356,7 +350,6 @@ def downvote_recipe(single_id):
 
 @app.route('/by_ingredient/')
 def by_ingredient():
-    ingredient_dictionary = {}
     ingredient_list = []
     counted_ingredients = {}
     for x in mongo.db.ingredients.find({},{ "_id": 0, "key_ingredient": 1}):
@@ -364,8 +357,7 @@ def by_ingredient():
         ingredient_list.append(y)
     for n in ingredient_list:
         m = mongo.db.recipes.find({"key_ingredient_1" : n}).count()
-        counted_ingredients[n] = m 
-    json_string = json.dumps(counted_ingredients)
+        counted_ingredients[n] = m
     return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find(), counted_ingredients=counted_ingredients)
 
 @app.route('/ingredient_recipes/<key_ingredient>')
