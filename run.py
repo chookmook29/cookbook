@@ -87,13 +87,10 @@ def add_recipe():
             'image': output, 
             'description': request.form['description'],
             'key_ingredient_1': request.form['key_ingredient_1'].lower(),
-            'key_ingredient_2': request.form['key_ingredient_2'].lower(),
-            'key_ingredient_3': request.form['key_ingredient_3'].lower(),
             'calories': request.form['calories'],
             'time': request.form['time'],
             'serves': request.form['serves'],
             'substitute_1': request.form['substitute_1'],
-            'substitute_2': request.form['substitute_2'],
             'voted_up': '',
             'voted_down': '',
             'upvotes': '0',
@@ -103,12 +100,6 @@ def add_recipe():
         check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_1'].lower()})
         if check_ingredient is None:
             key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_1').lower()})
-        check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_2'].lower()})
-        if check_ingredient is None:
-            key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_2').lower()})
-        check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_3'].lower()})
-        if check_ingredient is None:
-            key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_3').lower()})
         return redirect(url_for('my_recipes'))
     return render_template('add.html')
 
@@ -136,13 +127,10 @@ def update_recipe():
                 'image': request.form['image'], 
                 'description': request.form['description'],
                 'key_ingredient_1': request.form['key_ingredient_1'].lower(),
-                'key_ingredient_2': request.form['key_ingredient_2'].lower(),
-                'key_ingredient_3': request.form['key_ingredient_3'].lower(),
                 'calories': request.form['calories'],
                 'time': request.form['time'],
                 'serves': request.form['serves'],
                 'substitute_1': request.form['substitute_1'],
-                'substitute_2': request.form['substitute_2'],
                 'voted_up': '',
                 'voted_down': '',
                 'upvotes': '0',
@@ -227,13 +215,10 @@ def upvote_recipe(single_id):
                     'image': session['image'], 
                     'description': session['description'],
                     'key_ingredient_1': session['key_1'],
-                    'key_ingredient_2': session['key_2'],
-                    'key_ingredient_3': session['key_3'],
                     'calories': session['calories'],
                     'time': session['time'],
                     'serves': session['serves'],
                     'substitute_1': session['sub_1'],
-                    'substitute_2': session['sub_2'],
                     'voted_up': voted_up,
                     'voted_down': voted_down,
                     'upvotes': upvotes,
@@ -256,13 +241,10 @@ def upvote_recipe(single_id):
                     'image': session['image'], 
                     'description': session['description'],
                     'key_ingredient_1': session['key_1'],
-                    'key_ingredient_2': session['key_2'],
-                    'key_ingredient_3': session['key_3'],
                     'calories': session['calories'],
                     'time': session['time'],
                     'serves': session['serves'],
                     'substitute_1': session['sub_1'],
-                    'substitute_2': session['sub_2'],
                     'voted_up': voted_up,
                     'voted_down': voted_down,
                     'upvotes': upvotes,
@@ -305,13 +287,10 @@ def downvote_recipe(single_id):
                     'image': session['image'], 
                     'description': session['description'],
                     'key_ingredient_1': session['key_1'],
-                    'key_ingredient_2': session['key_2'],
-                    'key_ingredient_3': session['key_3'],
                     'calories': session['calories'],
                     'time': session['time'],
                     'serves': session['serves'],
                     'substitute_1': session['sub_1'],
-                    'substitute_2': session['sub_2'],
                     'voted_up': voted_up,
                     'voted_down': voted_down,
                     'upvotes': upvotes,
@@ -334,13 +313,10 @@ def downvote_recipe(single_id):
                     'image': session['image'], 
                     'description': session['description'],
                     'key_ingredient_1': session['key_1'],
-                    'key_ingredient_2': session['key_2'],
-                    'key_ingredient_3': session['key_3'],
                     'calories': session['calories'],
                     'time': session['time'],
                     'serves': session['serves'],
                     'substitute_1': session['sub_1'],
-                    'substitute_2': session['sub_2'],
                     'voted_up': voted_up,
                     'voted_down': voted_down,
                     'upvotes': session['upvotes'],
