@@ -100,6 +100,7 @@ def add_recipe():
         check_ingredient = key_ingredient.find_one({'key_ingredient' : request.form['key_ingredient_1'].lower()})
         if check_ingredient is None:
             key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_1').lower()})
+        flash('Recipe added')
         return redirect(url_for('my_recipes'))
     return render_template('add.html')
 
@@ -136,12 +137,14 @@ def update_recipe():
                 'upvotes': '0',
                 'downvotes': '0'
             })
-    return render_template('update.html')
+    flash('Recipe updated')
+    return redirect(url_for('my_recipes'))
 
 @app.route('/delete/<delete_id>')
 def delete_recipe(delete_id):
     single_delete = mongo.db.recipes.remove({'_id': ObjectId(delete_id)})
-    return render_template('delete.html', single_delete=single_delete)
+    flash('Recipe deleted')
+    return redirect(url_for('my_recipes'))
 
 @app.route('/show_single/<single_id>')
 def show_single(single_id):
