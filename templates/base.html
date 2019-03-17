@@ -25,16 +25,16 @@
 	<div class="topnav">
 		<div class="row">
 			<a href='{{ url_for('index') }}'>Home</a>
+			<a href='{{ url_for('show_all') }}'>Show Recipes</a>
+			<a href='{{ url_for('by_ingredient') }}'>By Ingredient</a>
 			{% if 'user' in session %}
-			<a href='{{ url_for('sign_out') }}'>Sign Out</a>
 			<a href='{{ url_for('my_recipes') }}'>My Recipes</a>
 			<a href='{{ url_for('add_recipe') }}'>Add Recipe</a>
+			<a href='{{ url_for('sign_out') }}'>Sign Out</a>
 			{% else %}
 			<a href='{{ url_for('sign_in') }}'>Sign In</a>
 			<a href='{{ url_for('register') }}'>Register</a>
 			{% endif %}
-			<a href='{{ url_for('show_all') }}'>Show Recipes</a>
-			<a href='{{ url_for('by_ingredient') }}'>By Ingredient</a>
 		</div>
 	</div>
 {% block content %}

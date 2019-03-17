@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block title%}Add Recipe{% endblock %}
 {% block content %}
-	<div class='container'>
+	<div class='container mt-4'>
 		<form action='{{url_for('add_recipe')}}' method="POST" enctype="multipart/form-data">
 			<label for='name'>Recipe name</label>
 			<input type='text' name='name' class="form-control" required>
-			<label for="image">Upload Your File</label>
-        	<br></br>
+			<label for="image">Upload image file</label>
+			<br>
         	<input type="file" name="image" required>
-        	<br></br>
+        	</br>
 			<label for='description'>Description</label>
 			<textarea name='description' class="form-control" rows="6" required></textarea>
-			<label for='key_ingredient_1'>Key ingredient</label>
+			<label for='key_ingredient_1'>Main ingredient</label>
 			<input type='text' name='key_ingredient_1' class="form-control" required>
 			<label for='calories'>Calories</label>
 			<input type='text' name='calories' class="form-control" required>
@@ -21,7 +21,7 @@
 			<input type='text' name='serves' class="form-control" required>
 			<label for='substitute_1'>Subsitute ingredient</label>
 			<input type='text' name='substitute_1' class="form-control">
-			<button type='submit' name='action' class="btn btn-dark">Submit</button>
+			<button type='submit' name='action' class="btn btn-dark mt-2">Submit</button>
 		</form>
 	</div>
 {% endblock %}
