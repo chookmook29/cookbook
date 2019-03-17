@@ -17,7 +17,6 @@
 @media screen and (min-width: 1200px) and (orientation: portrait){
 }
 body {
-  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 .topnav {
@@ -61,4 +60,23 @@ a {
 }
 .fa-thumbs-down {
   color: red;
+}
+.fa-search {
+  color: white;
+  padding-top: 0.2rem;
+}
+.search {
+  margin-bottom: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+.btn-link{
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
 }
