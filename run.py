@@ -334,7 +334,7 @@ def by_ingredient():
 			continue
 		else:
 			counted_ingredients[n] = m
-	return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find(), counted_ingredients=counted_ingredients)
+	return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find().sort("key_ingredient", 1), counted_ingredients=counted_ingredients)
 
 @app.route('/by_search/', methods=['POST'])
 def by_search():
