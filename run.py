@@ -330,7 +330,10 @@ def by_ingredient():
         ingredient_list.append(y)
     for n in ingredient_list:
         m = mongo.db.recipes.find({"key_ingredient_1" : n}).count()
-        counted_ingredients[n] = m
+        if m == 0:
+            continue
+        else:
+            counted_ingredients[n] = m
     return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find(), counted_ingredients=counted_ingredients)
 
 @app.route('/ingredient_recipes/<key_ingredient>')
