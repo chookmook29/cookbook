@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.secret_key = ']Nk(`K24HLRuRkdN'
 
 app.config['MONGO_DBNAME'] = 'cookbook'
-app.config['MONGO_URI'] = 'mongodb://admin:hadvjecbscW2vm4m@ds157834.mlab.com:57834/cookbook'
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
 S3_BUCKET = 'uploadscookbook'
 S3_KEY = os.environ.get('S3_KEY')
 S3_SECRET = os.environ.get('S3_SECRET')
