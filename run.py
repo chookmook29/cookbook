@@ -59,7 +59,7 @@ def sign_in():
 		if user_found:
 			if (user_found['password'] == request.form['password']):
 				session['user'] = request.form['user']
-				flash('You were successfully logged in')
+				flash('You were successfully signed in')
 				return redirect(url_for('index'))
 			return render_template('sign_in.html')
 		return render_template('sign_in.html')
@@ -67,8 +67,9 @@ def sign_in():
 
 @app.route('/sign_out')
 def sign_out():
+	flash('You were successfully signed out')
 	session.clear()
-	return render_template('index.html')
+	return redirect(url_for('index'))
 
 @app.route('/show_all')
 def show_all():
