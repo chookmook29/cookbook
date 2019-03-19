@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title%}Add Recipe{% endblock %}
 {% block content %}
+<main>
 <div id="chart"></div>
 <script type="text/javascript">
 	var w = 300;                        
@@ -47,5 +48,11 @@
 </script>
 {% for ingredient in key_ingredient %}
 	<a href="{{ url_for('ingredient_recipes', key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
+</main>
+<footer class="fixed">
+        <div class="text-center">
+            <p class="footer">Copyright &#169; 2019</p>
+        </div>
+</footer>
 {% endfor %}
 {% endblock %}

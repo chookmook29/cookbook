@@ -23,21 +23,28 @@ src: url("font/Rudiment.ttf");
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+footer {
+	background-color: #2d2d2d;
+}
 .topnav {
-  background-color: #2d2d2d;
-  overflow: hidden;
+ 	background-color: #2d2d2d;
+ 	overflow: hidden;
 }
 .topnav a {
-  float: left;
-  color: #f4f4f4;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+	float: left;
+	color: #f4f4f4;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
 }
 .topnav a:hover {
-  background-color: #ededed;
-  color: black;
+  	background-color: #ededed;
+  	color: black;
+}
+p.footer {
+	color: #f4f4f4;
+  font-size: 1rem; 
 }
 .carousel-inner img {
     width: 100%;
@@ -85,4 +92,9 @@ a {
   text-decoration: none;
   font-family: inherit;
   font-size: inherit;
+}
+.fixed {
+  position: fixed; 
+  bottom: 0;
+  width: 100%;
 }
