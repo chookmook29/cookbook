@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title%}Edit Recipe{% endblock %}
 {% block content %}
-	<div class='container'>
+	<div class='container mt-4'>
 		<form action='{{url_for('update_recipe')}}' method="POST">
 			<label for='name'>Recipe name</label>
 			<input type='text' name='name' class="form-control" value="{{ single_edit.name }}" required>
