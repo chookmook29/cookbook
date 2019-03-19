@@ -2,10 +2,10 @@
 {% block title%}Add Recipe{% endblock %}
 {% block content %}
 <main>
-<div id="chart"></div>
+<div id="chart" class="px-5 py-5"></div>
 <script type="text/javascript">
-	var w = 300;                        
-    var h = 300;                           
+	var w = 550;                        
+    var h = 550;                           
     var r = h/2;                            
     var color = d3.scale.category20c();     
     var data = [{% for key, value in counted_ingredients.items() %}
@@ -46,13 +46,15 @@
             .attr("text-anchor", "middle")                          
             .text(function(d, i) { return data[i].label; });
 </script>
-{% for ingredient in key_ingredient %}
-	<a href="{{ url_for('ingredient_recipes', key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
+    <div class="text-center">
+    {% for ingredient in key_ingredient %}
+    	<a href="{{ url_for('ingredient_recipes', key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
+    {% endfor %}
+    </div>
 </main>
 <footer class="fixed">
         <div class="text-center">
             <p class="footer">Copyright &#169; 2019</p>
         </div>
 </footer>
-{% endfor %}
 {% endblock %}
