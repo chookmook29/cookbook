@@ -18,7 +18,7 @@
 			<a href="{{url_for('downvote_recipe', single_id=single_recipe._id)}}"><i class="far fa-thumbs-down fa-3x"></i>{{ single_recipe.downvotes }}</a>	
 		</div>	
 	{% else %}
-		<div>
+		<div class="mb-4">
 			<i class="far fa-thumbs-up fa-3x"></i>{{ single_recipe.upvotes }}
 			<i class="far fa-thumbs-down fa-3x"></i>{{ single_recipe.downvotes }}
 		</div>
