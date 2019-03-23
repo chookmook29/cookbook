@@ -46,7 +46,7 @@
             .attr("text-anchor", "middle")                          
             .text(function(d, i) { return data[i].label; });
 </script>
-    <div class="text-center">
+    <div class="text-center mb-4">
     {% for ingredient in key_ingredient %}
     	<a href="{{ url_for('ingredient_recipes', key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
     {% endfor %}
