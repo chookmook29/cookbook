@@ -4,13 +4,11 @@
 	<div class="container mt-4">
 		<img src="{{ single_recipe.image }}" alt="Image">
 		<h2>{{ single_recipe.name.capitalize() }}</h2>
-		<p>{{ single_recipe.key_ingredient_1 }}</p>
 		<p>{{ single_recipe.description }}</p>
 		<p>Calories: {{ single_recipe.calories }} kcal</p>
 		<p>Time: {{ single_recipe.time }} min</p>
 		<p>Serves: {{ single_recipe.serves }}</p>
 		<p>Substitute ingredient: {{ single_recipe.substitute_1 }}</p>
-		<p>Another substitute: {{ single_recipe.substitute_2 }}</p>
 	
 	{% if 'user' in session %}
 		<div>
