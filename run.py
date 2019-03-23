@@ -84,7 +84,7 @@ def add_recipe():
 		recipes = mongo.db.recipes
 		recipes.insert({
 			'creator': session['user'],
-			'name': request.form['name'], 
+			'name': request.form['name'].lower(), 
 			'image': output, 
 			'description': request.form['description'],
 			'key_ingredient_1': request.form['key_ingredient_1'].lower(),
@@ -125,7 +125,7 @@ def update_recipe():
 			{'_id': ObjectId(edit_id)},
 			{
 				'creator': session['user'],
-				'name': request.form['name'], 
+				'name': request.form['name'].lower(), 
 				'image': request.form['image'], 
 				'description': request.form['description'],
 				'key_ingredient_1': request.form['key_ingredient_1'].lower(),
@@ -344,15 +344,11 @@ def by_search():
 	else:
 		search  = request.form['search'].lower()
 		recipes_total = mongo.db.recipes.find({'name': { "$regex": search }}).count()
+		recipes = mongo.db.recipes.find({'name': { "$regex": search }}) 
 		if recipes_total > 0:
-			return render_template('name.html', recipes=mongo.db.recipes.find({'name': { "$regex": search }}), recipes_total=recipes_total)
+			return render_template('name.html', recipes=recipes, recipes_total=recipes_total)
 		else:
-			search = search.capitalize()
-			recipes_total = mongo.db.recipes.find({'name': { "$regex": search }}).count()
-			if recipes_total > 0:
-				return render_template('name.html', recipes=mongo.db.recipes.find({'name': { "$regex": search }}), recipes_total=recipes_total)
-			else:
-				return render_template('no_results.html')
+			return render_template('no_results.html')
 
 
 @app.route('/ingredient_recipes/<key_ingredient>')
