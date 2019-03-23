@@ -9,7 +9,15 @@ Essentially, this part is your sales pitch.
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
 
 In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
+- As a user, I want to add new recipes, so I share them with other users.
+- As a user, I want to update or delete my old recipes.
+- As a user, I want to vote on recipes, so other users know how good/popular is given recipe.
+- As a user, I want to know other people's opinion about any given recipe.
+- As a user, I want to have an access to quick search option to look for recipes with particular keyword in title.
+- As a user, I want to check recipes with particular, available ingredient.
+- As a user, I want to visually check how many recipes with certain ingredient are in the database.
+- As a user, I want to be able to see which users contributed how many recipes.
+- As a user, I want to view all recipes in database.
 
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 
