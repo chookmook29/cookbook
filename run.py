@@ -335,7 +335,18 @@ def by_ingredient():
 			continue
 		else:
 			counted_ingredients[n] = m
-	return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find().sort("key_ingredient", 1), counted_ingredients=counted_ingredients)
+	contributors_list = []
+	counted_contributors = {}
+	for u in mongo.db.recipes.find({},{"creator": 1}):
+		w = u['creator']
+		contributors_list.append(w)
+	for o in contributors_list:
+		p = mongo.db.recipes.find({"creator" : o}).count()
+		if p == 0:
+			continue
+		else:
+			counted_contributors[o] = p
+	return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find().sort("key_ingredient", 1), counted_ingredients=counted_ingredients, counted_contributors=counted_contributors)
 
 @app.route('/by_search/', methods=['POST'])
 def by_search():
