@@ -2,58 +2,64 @@
 {% block title%}Add Recipe{% endblock %}
 {% block content %}
 <main>
-<div id="chart" class="px-5 py-5"></div>
-<script type="text/javascript">
-	var w = 520;                        
-    var h = 520;                           
-    var r = h/2;                            
-    var color = d3.scale.category20c();     
-    var data = [{% for key, value in counted_ingredients.items() %}
-    	{"label":"{{key}}", "value":{{value}}},
-    	{% endfor %}];
-    
-    var vis = d3.select("#chart")
-        .append("svg:svg")              
-        .data([data])                   
-            .attr("width", w)           
-            .attr("height", h)
-        .append("svg:g")                
-            .attr("transform", "translate(" + r + "," + r + ")")  
-    
-    var pie = d3.layout.pie().value(function(d){return d.value;});  
+    <div class="container">
+        <div class="row">
+            <div id="chart" class="col-8 py-5"></div>
+            <script type="text/javascript">
+            	var w = 520;                        
+                var h = 520;                           
+                var r = h/2;                            
+                var color = d3.scale.category20c();     
+                var data = [{% for key, value in counted_ingredients.items() %}
+                	{"label":"{{key}}", "value":{{value}}},
+                	{% endfor %}];
+                
+                var vis = d3.select("#chart")
+                    .append("svg:svg")              
+                    .data([data])                   
+                        .attr("width", w)           
+                        .attr("height", h)
+                    .append("svg:g")                
+                        .attr("transform", "translate(" + r + "," + r + ")")  
+                
+                var pie = d3.layout.pie().value(function(d){return d.value;});  
 
-    // declare an arc generator function
-    var arc = d3.svg.arc()              
-        .outerRadius(r);
- 
-    // select paths, use arc generator to draw
-    var arcs = vis.selectAll("g.slice")     
-        .data(pie)                           
-        .enter()                           
-            .append("svg:g")                
-                .attr("class", "slice");    
+                // declare an arc generator function
+                var arc = d3.svg.arc()              
+                    .outerRadius(r);
+             
+                // select paths, use arc generator to draw
+                var arcs = vis.selectAll("g.slice")     
+                    .data(pie)                           
+                    .enter()                           
+                        .append("svg:g")                
+                            .attr("class", "slice");    
 
-        arcs.append("svg:path")
-                .attr("fill", function(d, i) { return color(i); } ) 
-                .attr("d", arc);                                    
+                    arcs.append("svg:path")
+                            .attr("fill", function(d, i) { return color(i); } ) 
+                            .attr("d", arc);                                    
 
-        arcs.append("svg:text")                                     
-                .attr("transform", function(d) {          
-                d.innerRadius = 0;
-                d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";        
-            })
-            .attr("text-anchor", "middle")                          
-            .text(function(d, i) { return data[i].label; });
-</script>
-    <div class="text-center mb-4">
-    {% for ingredient in key_ingredient %}
-    	<a href="{{ url_for('ingredient_recipes', key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
-    {% endfor %}
-    </div>
+                    arcs.append("svg:text")                                     
+                            .attr("transform", function(d) {          
+                            d.innerRadius = 0;
+                            d.outerRadius = r;
+                            return "translate(" + arc.centroid(d) + ")";        
+                        })
+                        .attr("text-anchor", "middle")                          
+                        .text(function(d, i) { return data[i].label; });
+            </script>
+                <div class="text-center col-4 mt-5">
+                    <h2>Key Ingredients:</h2>
+                {% for ingredient in key_ingredient %}
+                	<a href="{{ url_for('ingredient_recipes', key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
+                    <br>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
 </main>
-<footer>
-        <div class="text-center mb-4">
+<footer class="fixed">
+        <div class="text-center">
             <p class="footer">Copyright &#169; 2019</p>
         </div>
 </footer>
