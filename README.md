@@ -38,10 +38,27 @@ In addition, you may also use this section to discuss plans for additional featu
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
-
-- [JQuery](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
+- HTML and CSS
+    - project uses **HTML** and **CSS** to build webpages.
+- [Bootstrap 4](https://getbootstrap.com/)
+    - The project uses some **Bootstrap** elements for more responsive layout.
+- [Python](https://www.python.org/)
+    - Back-end was written in **Python** .
+    - **vnev** library was used in development of the project.
+    - **random** module was used with dictionaries.
+- [Flask](http://flask.pocoo.org/)
+    - The project was built **flask** microframework due to its simplicity.
+    - **flask.session** was used to store all variables values. 
+- [Jinja2](https://jinja.pocoo.org/)
+    - Used for creating templates.
+- [unit-test](https://docs.python.org/3/library/unittest.html)
+    - Used for automated testing.
+- [Balsamiq](https://balsamiq.com/)
+    - Before development started, **Balsamiq** was used for wireframes.
+- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/)
+    - Adjusting elements of project's frontend.
+- [mLab](https://mlab.com/)
+    - Free MongoDB database.
 
 
 ## Testing
