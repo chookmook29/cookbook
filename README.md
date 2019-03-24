@@ -1,4 +1,4 @@
-# Cookbook
+# DishFinder
 
 One or two paragraphs providing an overview of your project.
 
@@ -66,14 +66,36 @@ If this section grows too long, you may want to split it off into a separate fil
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+The application is deployed at [DishFinder](https://dishfinderstage.herokuapp.com/).
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+In order to deploy, following changes has been made:
+- Set 'debug' value in run.py file to False
+- Added requirements.txt and Procfile, as required by heroku
+- Set Heroku Config Vars:
+    - IP to 0.0.0.0
+    - PORT to 5000
+    - environmental variables for AWS S3 account
+    - app secret key
+    - MongoDB configuration
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+To run it locally:
+- Install python 3
+- Install virtualenv
+- Create virtual environment inside directory of this webpage
+- Activate virtual environment
+    - source venv/bin/activate
+- Install flask packages using pip3 with virtual environment activated:
+	- flask-sessions
+	- pymongo 
+	- flask-pymongo 
+	- bson
+	- boto3 
+	- botocore 
+	- s3transfer packages
+- Start the web server with commands:
+    - export FLASK_APP=run.py
+    - flask run
+- Type http://127.0.0.1:5000 address in your browser window
 
 
 ## Credits
