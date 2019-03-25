@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block title%}My recipes{% endblock %}
 {% block content %}
 	<div class="container">
@@ -6,20 +6,20 @@
 			<div>
 				<ul class="nav nav-tabs nav-justified">
 				<li class="nav-item">
-				<a class="nav-link active" href="{{url_for('show_single', single_id=recipe._id, image=recipe.image, description=recipe.description, key_1=recipe.key_ingredient_1, calories=recipe.calories, time=recipe.time, serves=recipe.serves, sub_1=recipe.substitute_1, voted_list=recipe.voted_list, upvotes=recipe.upvotes, downvotes=recipe.downvotes)}}">{{recipe.name.capitalize()}}</a>
+				<a class="nav-link active" href="{{url_for("show_single", single_id=recipe._id, image=recipe.image, description=recipe.description, key_1=recipe.key_ingredient_1, calories=recipe.calories, time=recipe.time, serves=recipe.serves, sub_1=recipe.substitute_1, voted_list=recipe.voted_list, upvotes=recipe.upvotes, downvotes=recipe.downvotes)}}">{{recipe.name.capitalize()}}</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link" href="{{url_for('edit_recipe', edit_id=recipe._id)}}">Edit Recipe</a>
+				<a class="nav-link" href="{{url_for("edit_recipe", edit_id=recipe._id)}}">Edit Recipe</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link" href="{{url_for('delete_recipe', delete_id=recipe._id)}}">Delete Recipe</a>
+				<a class="nav-link" href="{{url_for("delete_recipe", delete_id=recipe._id)}}">Delete Recipe</a>
 				</li>
 				</ul>
 			</div>
 		{% endfor %}
 	</div>
 	<div class="text-center">
-		<a href="{{ url_for('index') }}"><button class="btn btn-dark mt-4">Back</button></a>
+		<a href="{{ url_for("index") }}"><button class="btn btn-dark mt-4">Back</button></a>
 	</div>
 	<footer class="fixed">
         <div class="text-center">

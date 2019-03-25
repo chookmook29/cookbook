@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block title%}Add Recipe{% endblock %}
 {% block content %}
 <main>
@@ -51,7 +51,7 @@
                 <div class="text-center col-4 mt-5">
                     <h2>Key Ingredients:</h2>
                 {% for ingredient in key_ingredient %}
-                	<a href="{{ url_for('ingredient_recipes', key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
+                	<a href="{{ url_for("ingredient_recipes", key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
                     <br>
                 {% endfor %}
                 </div>

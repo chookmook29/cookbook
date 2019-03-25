@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block title%}Single Recipe{% endblock %}
 {% block content %}
 	<div class="container mt-4">
@@ -10,10 +10,10 @@
 		<p>Serves: {{ single_recipe.serves }}</p>
 		<p>Substitute ingredient: {{ single_recipe.substitute_1 }}</p>
 	
-	{% if 'user' in session %}
+	{% if "user" in session %}
 		<div>
-			<a href="{{url_for('upvote_recipe', single_id=single_recipe._id)}}"><i class="far fa-thumbs-up fa-3x"></i>{{ single_recipe.upvotes }}</a>
-			<a href="{{url_for('downvote_recipe', single_id=single_recipe._id)}}"><i class="far fa-thumbs-down fa-3x"></i>{{ single_recipe.downvotes }}</a>	
+			<a href="{{url_for("upvote_recipe", single_id=single_recipe._id)}}"><i class="far fa-thumbs-up fa-3x"></i>{{ single_recipe.upvotes }}</a>
+			<a href="{{url_for("downvote_recipe", single_id=single_recipe._id)}}"><i class="far fa-thumbs-down fa-3x"></i>{{ single_recipe.downvotes }}</a>	
 		</div>	
 	{% else %}
 		<div class="mb-4">
@@ -24,7 +24,7 @@
 	{% endif %}
 	</div>
 	<div class="text-center my-4">
-		<a href="{{ url_for('show_all') }}"><button class="btn btn-dark mt-2">Back</button></a>
+		<a href="{{ url_for("show_all") }}"><button class="btn btn-dark mt-2">Back</button></a>
 	</div>
 	<footer>
 	        <div class="text-center">

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block title%}All Recipes{% endblock %}
 {% block content %}
 <div class="container">
@@ -8,8 +8,8 @@
 			<div class="card">
 			  <img class="card-img-top" src="{{ recipe.image }}" alt="Card image cap">
 			  <div class="card-body">
-			    <h5 class="card-title"><a href="{{url_for('show_single', single_id=recipe._id)}}">{{recipe.name.capitalize()}}</a></h5>
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    <h5 class="card-title"><a href="{{url_for("show_single", single_id=recipe._id)}}">{{recipe.name.capitalize()}}</a></h5>
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card"s content.</p>
 			    <i class="far fa-thumbs-up fa-2x"></i>{{ recipe.upvotes }}
 				<i class="far fa-thumbs-down fa-2x"></i>{{ recipe.downvotes }}
 			  </div>
