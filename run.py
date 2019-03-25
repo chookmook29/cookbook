@@ -23,7 +23,6 @@ s3 = boto3.client(
 
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
 	try:
-
 		s3.upload_fileobj(
 			file,
 			bucket_name,
@@ -31,8 +30,32 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
 		)
 	except Exception as e:
 		return e
-
 	return "{}{}".format(S3_LOCATION, file.filename)
+
+def update():
+	voted_up = session.get('voted_up')
+	voted_down = session.get('voted_down')
+	downvotes =  session.get('downvotes')
+	upvotes =  session.get('upvotes')
+	single_id = session.get('single_id')
+	recipes = mongo.db.recipes
+	recipes.update(
+				{'_id': ObjectId(single_id)},
+				{
+					'creator': session['creator'],
+					'name': session['name'], 
+					'image': session['image'], 
+					'description': session['description'],
+					'key_ingredient_1': session['key_1'],
+					'calories': session['calories'],
+					'time': session['time'],
+					'serves': session['serves'],
+					'substitute_1': session['sub_1'],
+					'voted_up': voted_up,
+					'voted_down': voted_down,
+					'upvotes': upvotes,
+					'downvotes': downvotes
+				})
 
 mongo = PyMongo(app)
 
@@ -204,24 +227,7 @@ def upvote_recipe(single_id):
 		session['voted_down'] =  voted_down
 		session['upvotes'] = upvotes
 		session['downvotes'] = downvotes
-		recipes = mongo.db.recipes
-		recipes.update(
-				{'_id': ObjectId(single_id)},
-				{
-					'creator': session['creator'],
-					'name': session['name'], 
-					'image': session['image'], 
-					'description': session['description'],
-					'key_ingredient_1': session['key_1'],
-					'calories': session['calories'],
-					'time': session['time'],
-					'serves': session['serves'],
-					'substitute_1': session['sub_1'],
-					'voted_up': voted_up,
-					'voted_down': voted_down,
-					'upvotes': upvotes,
-					'downvotes': downvotes
-				})  
+		update()  
 		return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
 	else:
 		upvotes = int(upvotes)
@@ -276,24 +282,7 @@ def downvote_recipe(single_id):
 		session['voted_down'] =  voted_down
 		session['upvotes'] = upvotes
 		session['downvotes'] = downvotes
-		recipes = mongo.db.recipes
-		recipes.update(
-				{'_id': ObjectId(single_id)},
-				{
-					'creator': session['creator'],
-					'name': session['name'], 
-					'image': session['image'], 
-					'description': session['description'],
-					'key_ingredient_1': session['key_1'],
-					'calories': session['calories'],
-					'time': session['time'],
-					'serves': session['serves'],
-					'substitute_1': session['sub_1'],
-					'voted_up': voted_up,
-					'voted_down': voted_down,
-					'upvotes': upvotes,
-					'downvotes': downvotes
-				})  
+		update() 
 		return render_template('show_single.html', single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
 	else:
 		downvotes = int(downvotes)
