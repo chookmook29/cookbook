@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request,
+from flask import Flask, render_template, request
 from flask import url_for, session, redirect, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -23,15 +23,15 @@ s3 = boto3.client(
 
 
 def upload_file_to_s3(file, bucket_name):
-    try:
-        s3.upload_fileobj(
-            file,
-            bucket_name,
-            file.filename,
-        )
-        except Exception as e:
-            return e
-        return "{}{}".format(S3_LOCATION, file.filename)
+	try:
+		s3.upload_fileobj(
+			file,
+			bucket_name,
+			file.filename,
+		)
+	except Exception as e:
+		return e
+	return "{}{}".format(S3_LOCATION, file.filename)
 
 
 def update():
