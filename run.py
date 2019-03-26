@@ -5,6 +5,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import boto3
 
+
 app = Flask(__name__)
 app.secret_key = ']Nk(`K24HLRuRkdN'
 
@@ -23,15 +24,11 @@ s3 = boto3.client(
 
 
 def upload_file_to_s3(file, bucket_name):
-	try:
-		s3.upload_fileobj(
-			file,
-			bucket_name,
-			file.filename,
-		)
-	except Exception as e:
-		return e
-	return "{}{}".format(S3_LOCATION, file.filename)
+    try:
+        s3.upload_fileobj(file, bucket_name, file.filename)
+    except Exception as e:
+        return e
+    return "{}{}".format(S3_LOCATION, file.filename)
 
 
 def update():
@@ -129,9 +126,12 @@ def add_recipe():
             'downvotes': '0'
             })
         key_ingredient = mongo.db.ingredients
-        check_ingredient = key_ingredient.find_one({'key_ingredient': request.form['key_ingredient_1'].lower()})
+        check_ingredient = key_ingredient
+        .find_one({'key_ingredient': request.form['key_ingredient_1'].lower()})
         if check_ingredient is None:
-            key_ingredient.insert({'key_ingredient': request.form.get('key_ingredient_1').lower()})
+            key_ingredient
+            .insert({'key_ingredient': request.form.get('key_ingredient_1')
+                    .lower()})
         flash('Recipe added')
         return redirect(url_for('my_recipes'))
     return render_template('add.html')
@@ -227,7 +227,9 @@ def upvote_recipe(single_id):
     voted_up = str(voted_up)
     voted_down = str(voted_down)
     if user in voted_up:
-        return render_template('show_single.html', single_recipe=mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
+        return render_template('show_single.html',
+                               single_recipe=mongo.db.recipes
+                               .find_one({'_id': ObjectId(single_id)}))
     elif user in voted_down:
         downvotes = int(downvotes)
         downvotes = downvotes - 1
@@ -242,7 +244,9 @@ def upvote_recipe(single_id):
         session['upvotes'] = upvotes
         session['downvotes'] = downvotes
         update()
-        return render_template('show_single.html', single_recipe=mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
+        return render_template('show_single.html',
+                               single_recipe=mongo.db.recipes
+                               .find_one({'_id': ObjectId(single_id)}))
     else:
         upvotes = int(upvotes)
         upvotes = upvotes + 1
@@ -268,7 +272,9 @@ def upvote_recipe(single_id):
                     'upvotes': upvotes,
                     'downvotes': session['downvotes']
                 })
-        return render_template('show_single.html', single_recipe=mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
+        return render_template('show_single.html',
+                               single_recipe=mongo.db.recipes
+                               .find_one({'_id': ObjectId(single_id)}))
 
 
 @app.route('/downvote_recipe/<single_id>')
@@ -282,7 +288,9 @@ def downvote_recipe(single_id):
     voted_down = str(voted_down)
     voted_up = str(voted_up)
     if user in voted_down:
-        return render_template('show_single.html', single_recipe=mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
+        return render_template('show_single.html',
+                               single_recipe=mongo.db.recipes
+                               .find_one({'_id': ObjectId(single_id)}))
     elif user in voted_up:
         downvotes = int(downvotes)
         downvotes = downvotes + 1
@@ -297,7 +305,9 @@ def downvote_recipe(single_id):
         session['upvotes'] = upvotes
         session['downvotes'] = downvotes
         update()
-        return render_template('show_single.html', single_recipe=mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
+        return render_template('show_single.html',
+                               single_recipe=mongo.db.recipes
+                               .find_one({'_id': ObjectId(single_id)}))
     else:
         downvotes = int(downvotes)
         downvotes = downvotes + 1
@@ -323,7 +333,9 @@ def downvote_recipe(single_id):
                     'upvotes': session['upvotes'],
                     'downvotes': downvotes
                 })
-        return render_template('show_single.html', single_recipe=mongo.db.recipes.find_one({'_id': ObjectId(single_id)}))
+        return render_template('show_single.html',
+                               single_recipe=mongo.db.recipes
+                               .find_one({'_id': ObjectId(single_id)}))
 
 
 @app.route('/by_ingredient/')
@@ -350,7 +362,11 @@ def by_ingredient():
             continue
         else:
             counted_contributors[o] = p
-    return render_template('ingredient.html', key_ingredient=mongo.db.ingredients.find().sort("key_ingredient", 1), counted_ingredients=counted_ingredients, counted_contributors=counted_contributors)
+    return render_template('ingredient.html',
+                           key_ingredient=mongo.db.ingredients.find()
+                           .sort("key_ingredient", 1),
+                           counted_ingredients=counted_ingredients,
+                           counted_contributors=counted_contributors)
 
 
 @app.route('/by_search/', methods=['POST'])
@@ -359,18 +375,26 @@ def by_search():
         return render_template('no_results.html')
     else:
         search = request.form['search'].lower()
-        recipes_total = mongo.db.recipes.find({'name': {"$regex": search}}).count()
+        recipes_total = mongo.db.recipes
+        .find({'name': {"$regex": search}}).count()
         recipes = mongo.db.recipes.find({'name': {"$regex": search}})
         if recipes_total > 0:
-            return render_template('name.html', recipes=recipes, recipes_total=recipes_total)
+            return render_template('name.html',
+                                   recipes=recipes,
+                                   recipes_total=recipes_total)
         else:
             return render_template('no_results.html')
 
 
 @app.route('/ingredient_recipes/<key_ingredient>')
 def ingredient_recipes(key_ingredient):
-    recipes_total = mongo.db.recipes.find({'key_ingredient_1': key_ingredient}).count()
-    return render_template('single_ingredient.html', recipes=mongo.db.recipes.find({'key_ingredient_1': key_ingredient}), recipes_total=recipes_total, key_ingredient=key_ingredient)
+    recipes_total = mongo.db.recipes
+    .find({'key_ingredient_1': key_ingredient}).count()
+    return render_template('single_ingredient.html',
+                           recipes=mongo.db.recipes
+                           .find({'key_ingredient_1': key_ingredient}),
+                           recipes_total=recipes_total,
+                           key_ingredient=key_ingredient)
 
 
 if __name__ == '__main__':
