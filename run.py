@@ -10,7 +10,8 @@ app = Flask(__name__)
 app.secret_key = ']Nk(`K24HLRuRkdN'
 
 app.config['MONGO_DBNAME'] = 'cookbook'
-app.config['MONGO_URI'] = 'mongodb://admin:hadvjecbscW2vm4m@ds157834.mlab.com:57834/cookbook'
+app.config['MONGO_URI'] = \
+    'mongodb://admin:hadvjecbscW2vm4m@ds157834.mlab.com:57834/cookbook'
 S3_BUCKET = 'uploadscookbook'
 S3_KEY = os.environ.get('S3_KEY')
 S3_SECRET = os.environ.get('S3_SECRET')
@@ -126,12 +127,13 @@ def add_recipe():
             'downvotes': '0'
             })
         key_ingredient = mongo.db.ingredients
-        check_ingredient = key_ingredient
-        .find_one({'key_ingredient': request.form['key_ingredient_1'].lower()})
+        check_ingredient = key_ingredient\
+            .find_one({'key_ingredient': request.form['key_ingredient_1']
+                      .lower()})
         if check_ingredient is None:
-            key_ingredient
-            .insert({'key_ingredient': request.form.get('key_ingredient_1')
-                    .lower()})
+            key_ingredient\
+                .insert({'key_ingredient': request.form.get('key_ingredient_1')
+                        .lower()})
         flash('Recipe added')
         return redirect(url_for('my_recipes'))
     return render_template('add.html')
@@ -375,8 +377,8 @@ def by_search():
         return render_template('no_results.html')
     else:
         search = request.form['search'].lower()
-        recipes_total = mongo.db.recipes
-        .find({'name': {"$regex": search}}).count()
+        recipes_total = mongo.db.recipes\
+            .find({'name': {"$regex": search}}).count()
         recipes = mongo.db.recipes.find({'name': {"$regex": search}})
         if recipes_total > 0:
             return render_template('name.html',
@@ -388,8 +390,8 @@ def by_search():
 
 @app.route('/ingredient_recipes/<key_ingredient>')
 def ingredient_recipes(key_ingredient):
-    recipes_total = mongo.db.recipes
-    .find({'key_ingredient_1': key_ingredient}).count()
+    recipes_total = mongo.db.recipes\
+        .find({'key_ingredient_1': key_ingredient}).count()
     return render_template('single_ingredient.html',
                            recipes=mongo.db.recipes
                            .find({'key_ingredient_1': key_ingredient}),
