@@ -18,7 +18,7 @@ S3_SECRET = os.environ.get('S3_SECRET')
 S3_LOCATION = 'http://uploadscookbook.s3.amazonaws.com/'
 
 s3 = boto3.client(
-    "s3",
+    's3',
     aws_access_key_id=S3_KEY,
     aws_secret_access_key=S3_SECRET
 )
@@ -29,7 +29,7 @@ def upload_file_to_s3(file, bucket_name):
         s3.upload_fileobj(file, bucket_name, file.filename)
     except Exception as e:
         return e
-    return "{}{}".format(S3_LOCATION, file.filename)
+    return '{}{}'.format(S3_LOCATION, file.filename)
 
 
 def update():
@@ -100,8 +100,8 @@ def sign_in():
 
 @app.route('/sign_out')
 def sign_out():
-    flash('You were successfully signed out')
     session.clear()
+    flash('You were successfully signed out')
     return redirect(url_for('index'))
 
 
@@ -114,7 +114,7 @@ def show_all():
 @app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
     if request.method == 'POST':
-        file = request.files["image"]
+        file = request.files['image']
         output = upload_file_to_s3(file, S3_BUCKET)
         recipes = mongo.db.recipes
         recipes.insert({
@@ -247,7 +247,7 @@ def upvote_recipe(single_id):
         downvotes = int(downvotes)
         downvotes = downvotes - 1
         downvotes = str(downvotes)
-        voted_down = voted_down.replace(user, "")
+        voted_down = voted_down.replace(user, '')
         upvotes = int(upvotes)
         upvotes = upvotes + 1
         upvotes = str(upvotes)
@@ -312,7 +312,7 @@ def downvote_recipe(single_id):
         upvotes = int(upvotes)
         upvotes = upvotes - 1
         upvotes = str(upvotes)
-        voted_up = voted_up.replace(user, "")
+        voted_up = voted_up.replace(user, '')
         session['voted_up'] = voted_up
         session['voted_down'] = voted_down
         session['upvotes'] = upvotes
@@ -355,42 +355,42 @@ def downvote_recipe(single_id):
 def by_ingredient():
     ingredient_list = []
     counted_ingredients = {}
-    for x in mongo.db.ingredients.find({}, {"_id": 0, "key_ingredient": 1}):
+    for x in mongo.db.ingredients.find({}, {'_id': 0, 'key_ingredient': 1}):
         y = x['key_ingredient']
         ingredient_list.append(y)
     for n in ingredient_list:
-        m = mongo.db.recipes.find({"key_ingredient_1": n}).count()
+        m = mongo.db.recipes.find({'key_ingredient_1': n}).count()
         if m == 0:
             continue
         else:
             counted_ingredients[n] = m
     contributors_list = []
     counted_contributors = {}
-    for u in mongo.db.recipes.find({}, {"creator": 1}):
+    for u in mongo.db.recipes.find({}, {'creator': 1}):
         w = u['creator']
         contributors_list.append(w)
     for o in contributors_list:
-        p = mongo.db.recipes.find({"creator": o}).count()
+        p = mongo.db.recipes.find({'creator': o}).count()
         if p == 0:
             continue
         else:
             counted_contributors[o] = p
     return render_template('ingredient.html',
                            key_ingredient=mongo.db.ingredients.find()
-                           .sort("key_ingredient", 1),
+                           .sort('key_ingredient', 1),
                            counted_ingredients=counted_ingredients,
                            counted_contributors=counted_contributors)
 
 
 @app.route('/by_search/', methods=['POST'])
 def by_search():
-    if request.form['search'] == "":
+    if request.form['search'] == '':
         return render_template('no_results.html')
     else:
         search = request.form['search'].lower()
         recipes_total = mongo.db.recipes\
-            .find({'name': {"$regex": search}}).count()
-        recipes = mongo.db.recipes.find({'name': {"$regex": search}})
+            .find({'name': {'$regex': search}}).count()
+        recipes = mongo.db.recipes.find({'name': {'$regex': search}})
         if recipes_total > 0:
             return render_template('name.html',
                                    recipes=recipes,
