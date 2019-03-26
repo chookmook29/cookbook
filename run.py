@@ -142,8 +142,13 @@ def add_recipe():
 @app.route('/my_recipes/')
 def my_recipes():
     user = session.get('user')
+    my_recipes_count = mongo.db.recipes.find({'creator': session['user']})\
+        .count()
     my_recipes = mongo.db.recipes.find({'creator': session['user']})
-    return render_template('my.html', my_recipes=my_recipes, user=user)
+    if my_recipes_count == 0:
+        return render_template('no_results.html')
+    else: 
+        return render_template('my.html', my_recipes=my_recipes, user=user)
 
 
 @app.route('/edit_recipe/<edit_id>')
