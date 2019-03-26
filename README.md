@@ -59,6 +59,9 @@ In addition, you may also use this section to discuss plans for additional featu
     - Adjusting elements of project's frontend.
 - [mLab](https://mlab.com/)
     - Free MongoDB database.
+- [PEP8]http://pep8online.com/
+    - Used to check python syntax errors.
+
 
 
 ## Testing
@@ -98,21 +101,17 @@ In order to deploy, following changes has been made:
 To run it locally:
 - Install python 3
 - Install virtualenv
-- Create virtual environment inside directory of this webpage
+- Create virtual environment inside directory of this project
 - Activate virtual environment
     - source venv/bin/activate
-- Install flask packages using pip3 with virtual environment activated:
-	- flask-sessions
+- Install flask packages using pip3 with virtualenv is activated:
 	- pymongo 
-	- flask-pymongo 
 	- bson
 	- boto3 
-	- botocore 
-	- s3transfer packages
 - Start the web server with commands:
     - export FLASK_APP=run.py
     - flask run
-- Type http://127.0.0.1:5000 address in your browser window
+- Type http://127.0.0.1:5000 address or http://localhost:5000 in your browser window
 
 
 ## Credits

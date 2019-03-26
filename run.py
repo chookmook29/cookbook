@@ -153,7 +153,7 @@ def my_recipes():
     my_recipes = mongo.db.recipes.find({'creator': session['user']})
     if my_recipes_count == 0:
         return render_template('no_results.html')
-    else: 
+    else:
         return render_template('my.html', my_recipes=my_recipes, user=user)
 
 
