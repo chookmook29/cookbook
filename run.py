@@ -69,11 +69,17 @@ def index():
 def register():
     if request.method == 'POST':
         users = mongo.db.users
-        user = request.form['user']
-        password = request.form['password']
-        users.insert({'user': user, 'password': password})
-        session['user'] = request.form['user']
-        return redirect(url_for('index'))
+        user_found = users.find_one({'user': request.form['user']})
+        if user_found:
+            flash('User already exists')
+            return render_template('register.html')
+        else:
+            user = request.form['user']
+            password = request.form['password']
+            users.insert({'user': user, 'password': password})
+            session['user'] = request.form['user']
+            flash('User registered')
+            return redirect(url_for('index'))
     return render_template('register.html')
 
 
