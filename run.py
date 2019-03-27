@@ -13,26 +13,22 @@ app.config['MONGO_DBNAME'] = 'cookbook'
 app.config['MONGO_URI'] = \
     'mongodb://admin:hadvjecbscW2vm4m@ds157834.mlab.com:57834/cookbook'
 S3_BUCKET = 'uploadscookbook'
-S3_KEY = os.environ.get('S3_KEY')
+S3_KEY = os.environ.get('S3_KEY')  # for safety reasons s3 key and password stored on Heroku server
 S3_SECRET = os.environ.get('S3_SECRET')
 S3_LOCATION = 'http://uploadscookbook.s3.amazonaws.com/'
 
-s3 = boto3.client(
+mongo = PyMongo(app)
+
+s3 = boto3.client(  # boto3 library makes it easy to set up s3 connection
     's3',
     aws_access_key_id=S3_KEY,
     aws_secret_access_key=S3_SECRET
 )
 
 
-def upload_file_to_s3(file, bucket_name):
-    try:
-        s3.upload_fileobj(file, bucket_name, file.filename)
-    except Exception as e:
-        return e
-    return '{}{}'.format(S3_LOCATION, file.filename)
-
-
 def update():
+    # update() is being called twice in two different functions
+    # to simplify code it's separated
     voted_up = session.get('voted_up')
     voted_down = session.get('voted_down')
     downvotes = session.get('downvotes')
@@ -57,7 +53,14 @@ def update():
                     'downvotes': downvotes
                 })
 
-mongo = PyMongo(app)
+
+def upload_file_to_s3(file, bucket_name):  # function for file uploading
+    try:
+        s3.upload_fileobj(file, bucket_name, file.filename)
+    except Exception as e:
+        # catching exceptions of type and bounds it to variable e
+        return e
+    return '{}{}'.format(S3_LOCATION, file.filename)
 
 
 @app.route('/')
@@ -70,6 +73,7 @@ def register():
     if request.method == 'POST':
         users = mongo.db.users
         user_found = users.find_one({'user': request.form['user']})
+        # safety feature, prevents registration of same username
         if user_found:
             flash('User already exists')
             return render_template('register.html')
@@ -78,6 +82,7 @@ def register():
             password = request.form['password']
             users.insert({'user': user, 'password': password})
             session['user'] = request.form['user']
+            # store user in server memory, used in subpages functions
             flash('User registered')
             return redirect(url_for('index'))
     return render_template('register.html')
@@ -100,7 +105,8 @@ def sign_in():
 
 @app.route('/sign_out')
 def sign_out():
-    session.clear()
+    session.clear()  # clears all temp data stored
+    # has to stay above, otherwise prevents message from from displaying
     flash('You were successfully signed out')
     return redirect(url_for('index'))
 
@@ -136,6 +142,8 @@ def add_recipe():
         check_ingredient = key_ingredient\
             .find_one({'key_ingredient': request.form['key_ingredient_1']
                       .lower()})
+    # has to be lowered to make ingredient searches effective
+    # useful in by_ingredient() function
         if check_ingredient is None:
             key_ingredient\
                 .insert({'key_ingredient': request.form.get('key_ingredient_1')
@@ -150,8 +158,9 @@ def my_recipes():
     user = session.get('user')
     my_recipes_count = mongo.db.recipes.find({'creator': session['user']})\
         .count()
+    # needed in situations when user hasn't created any recipes yet
     my_recipes = mongo.db.recipes.find({'creator': session['user']})
-    if my_recipes_count == 0:
+    if my_recipes_count == 0:  # renders different page based on this condition
         return render_template('no_results.html')
     else:
         return render_template('my.html', my_recipes=my_recipes, user=user)
@@ -198,6 +207,17 @@ def delete_recipe(delete_id):
 
 @app.route('/show_single/<single_id>')
 def show_single(single_id):
+    '''
+    PyMongo queries create BSON objects, which doesn't have same structure
+    as JSON, so to loop through it in elegant way I would have to create
+    custom JSON Encoder (default one causing errors).
+    The problem is object's id key and value structure. Value has another
+    element in brackets which doesn't parse well. So I decided to create
+    a list of object's values and call each value every time, then assign it
+    to session variable. I've ignored first entry(at position 0)
+    causing problems. It wasn't needed as single_id is already
+    in session memory.
+    '''
     single_recipe = mongo.db.recipes.find_one({'_id': ObjectId(single_id)})
     session['single_id'] = single_id
     creator = list(single_recipe.values())[1]
@@ -226,6 +246,7 @@ def show_single(single_id):
     session['upvotes'] = upvotes
     downvotes = list(single_recipe.values())[13]
     session['downvotes'] = downvotes
+    # all these values are needed for upvote/downvote manipulation below
     return render_template('show_single.html', single_recipe=single_recipe)
 
 
