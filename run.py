@@ -261,6 +261,7 @@ def upvote_recipe(single_id):
     voted_up = str(voted_up)
     voted_down = str(voted_down)
     if user in voted_up:
+        # searches through a string created from names of users
         return render_template('show_single.html',
                                single_recipe=mongo.db.recipes
                                .find_one({'_id': ObjectId(single_id)}))
@@ -374,6 +375,11 @@ def downvote_recipe(single_id):
 
 @app.route('/by_ingredient/')
 def by_ingredient():
+    '''
+    Instead of dumping JSON object and calling it in d3 chart I made use of
+    Jinja templates. Loops fill list of ingredients first and then populate
+    dictionary with values being counted ingredients.
+    '''
     ingredient_list = []
     counted_ingredients = {}
     for x in mongo.db.ingredients.find({}, {'_id': 0, 'key_ingredient': 1}):
@@ -385,6 +391,7 @@ def by_ingredient():
             continue
         else:
             counted_ingredients[n] = m
+    # contributors are being counted in similar way
     contributors_list = []
     counted_contributors = {}
     for u in mongo.db.recipes.find({}, {'creator': 1}):
@@ -406,9 +413,14 @@ def by_ingredient():
 @app.route('/by_search/', methods=['POST'])
 def by_search():
     if request.form['search'] == '':
+        # prevents from searching with space instead of text
         return render_template('no_results.html')
     else:
         search = request.form['search'].lower()
+        '''
+        regular expression used to make it possible
+        to search for a fragment of text in all names of recipes.
+        '''
         recipes_total = mongo.db.recipes\
             .find({'name': {'$regex': search}}).count()
         recipes = mongo.db.recipes.find({'name': {'$regex': search}})
