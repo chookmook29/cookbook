@@ -1,26 +1,28 @@
 {% extends "base.html" %}
 {% block title%}All Recipes{% endblock %}
 {% block content %}
-<div class="container">
-	<div class="row mt-4">
-	{% for recipe in recipes %}
-		<div class="col-6">
-			<div class="card">
-			  <img class="card-img-top" src="{{ recipe.image }}" alt="Card image cap">
-			  <div class="card-body">
-			    <h5 class="card-title"><a href="{{url_for("show_single", single_id=recipe._id)}}">{{recipe.name.capitalize()}}</a></h5>
-			    <p class="card-text">{{ recipe.description[0:100] + "..."}}</p>
-			    <i class="far fa-thumbs-up fa-2x"></i>{{ recipe.upvotes }}
-				<i class="far fa-thumbs-down fa-2x"></i>{{ recipe.downvotes }}
-			  </div>
+	<main>
+		<div class="container">
+			<div class="row mt-4">
+			{% for recipe in recipes %}
+				<div class="col-6">
+					<div class="card">
+					  <img class="card-img-top" src="{{ recipe.image }}" alt="Card image cap">
+					  <div class="card-body">
+					    <h5 class="card-title"><a href="{{url_for("show_single", single_id=recipe._id)}}">{{recipe.name.capitalize()}}</a></h5>
+					    <p class="card-text">{{ recipe.description[0:100] + "..."}}</p>
+					    <i class="far fa-thumbs-up fa-2x"></i>{{ recipe.upvotes }}
+						<i class="far fa-thumbs-down fa-2x"></i>{{ recipe.downvotes }}
+					  </div>
+					</div>
+				</div>
+			{% endfor %}
 			</div>
 		</div>
-	{% endfor %}
-	</div>
-</div>
-<footer>
-        <div class="text-center">
-            <p class="footer">Copyright &#169; 2019</p>
-        </div>
-</footer>
+	</main>
+	<footer>
+	        <div class="text-center">
+	            <p class="footer">Copyright &#169; 2019</p>
+	        </div>
+	</footer>
 {% endblock %}
