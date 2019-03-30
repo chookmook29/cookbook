@@ -117,11 +117,14 @@ To run it locally:
 ## Credits
 
 ### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+
+- Images where taken from [Shutterstock.com](https://www.shutterstock.com/)
+- Font was taken [FontSquirrel.com](https://www.fontsquirrel.com/)
 
 ### Media
-- The photos used in this site were obtained from ...
+
+- The photos used in this site were obtained from [Shutterstock.com](https://www.shutterstock.com/)
 
 ### Acknowledgements
 
-- I received inspiration for this project from X
+- Big thank you to my mentor [Antonija Šimić](https://github.com/tonkec/)
