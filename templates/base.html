@@ -11,7 +11,11 @@
 	<script src="https://d3js.org/d3.v3.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{ url_for("static", filename="css/main.css") }}">
-	{% with messages = get_flashed_messages() %}
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}">
+</head>
+<body>
+	<header>
+		{% with messages = get_flashed_messages() %}
 		{% if messages %}
 		<div class="flashes">
 		{% for message in messages %}
@@ -19,10 +23,7 @@
 		{% endfor %}
 		</div>
 		{% endif %}
-	{% endwith %}
-</head>
-<body>
-	<header>
+		{% endwith %}
 		<div class="topnav px-3">
 			<div class="row">
 				<a href="{{ url_for("index") }}">Home</a>
