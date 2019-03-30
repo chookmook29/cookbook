@@ -15,7 +15,7 @@ app.config['MONGO_URI'] = \
 S3_BUCKET = 'uploadscookbook'
 S3_KEY = os.environ.get('S3_KEY')  # for safety reasons s3 key and password stored on Heroku server
 S3_SECRET = os.environ.get('S3_SECRET')
-S3_LOCATION = 'http://uploadscookbook.s3.amazonaws.com/'
+S3_LOCATION = 'https://uploadscookbook.s3.amazonaws.com/'
 
 mongo = PyMongo(app)
 
