@@ -98,6 +98,7 @@ def sign_in():
                 session['user'] = request.form['user']
                 flash('You were successfully signed in')
                 return redirect(url_for('index'))
+            flash('Wrong username or password')
             return render_template('sign_in.html')
         return render_template('sign_in.html')
     return render_template('sign_in.html')

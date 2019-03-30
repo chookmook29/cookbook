@@ -3,9 +3,9 @@
 {% block content %}
 	<main>
 		<div class="container mt-4">
-			<img src="{{ single_recipe.image }}" alt="Image">
 			<h2>{{ single_recipe.name.capitalize() }}</h2>
-			<p>{{ single_recipe.description }}</p>
+			<img src="{{ single_recipe.image }}" alt="Image">
+			<p class="mt-3">{{ single_recipe.description }}</p>
 			<p>Calories: {{ single_recipe.calories }} kcal</p>
 			<p>Time: {{ single_recipe.time }} min</p>
 			<p>Serves: {{ single_recipe.serves }}</p>
