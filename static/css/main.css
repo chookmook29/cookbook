@@ -4,7 +4,7 @@ src: url("font/Rudiment.ttf");
 }
 @media screen and (max-width: 575px) and (orientation: portrait){
 .carousel-inner img {
-  width: 160%;
+  width: 200%;
 }
 .inline-menu {
   display: none;
@@ -38,7 +38,7 @@ h1 {
 }
 @media screen and (min-width: 576px) and (orientation: portrait){
 .carousel-inner img {
-  width: 150%;
+  width: 190%;
 }
 .inline-menu {
   display: none;
@@ -72,7 +72,7 @@ h1 {
 }
 @media screen and (min-width: 768px) and (orientation: portrait){
 .carousel-inner img {
-  width: 140%;
+  width: 180%;
 }
 .inline-menu {
   display: none;

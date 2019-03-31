@@ -4,10 +4,10 @@
     <main>
         <div class="container">
             <div class="row">
-                <div id="chart" class="col-8 py-3"></div>
+                <div id="chart" class="col-sm-12 col-md-6 py-3"></div>
                 <script type="text/javascript">
-                	var w = 500;
-                    var h = 500;
+                	var w = 400;
+                    var h = 400;
                     var r = h/2;
                     var color = d3.scale.category20c();
                     var data = [{% for key, value in counted_ingredients.items() %}
@@ -50,10 +50,10 @@
                             .attr("text-anchor", "middle")
                             .text(function(d, i) { return data[i].label; });
                 </script>
-                    <div class="text-center col-4 mt-5">
+                    <div class="text-center col-sm-12 col-md-4 mt-5">
                         <h2>Key Ingredients:</h2>
-                    {% for ingredient in key_ingredient %}
-                    	<a href="{{ url_for("ingredient_recipes", key_ingredient=ingredient.key_ingredient) }}">{{ ingredient.key_ingredient }}</a>
+                    {% for key, value in counted_ingredients.items() %}
+                    	<a href="{{ url_for("ingredient_recipes", key_ingredient=key) }}" style="font-size:{{ (value * 2) + 12 }}px;">{{ key }}</a>
                         <br>
                     {% endfor %}
                     </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="row">
                     {% for key, value in counted_contributors.items() %}
-                        <p>{{key}}: {{value}} &nbsp;</p>
+                        <p style="font-size:{{ (value * 2) + 12 }}px;">{{key}}: {{value}} &nbsp;</p>
                         {% endfor %}
                 </div>
             </div>
