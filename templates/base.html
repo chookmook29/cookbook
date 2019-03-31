@@ -26,18 +26,35 @@
 		{% endwith %}
 		<div class="topnav px-3">
 			<div class="row">
-				<a href="{{ url_for("index") }}">HOME</a>
-				<a href="{{ url_for("show_all") }}">SHOW RECIPES</a>
-				<a href="{{ url_for("by_ingredient") }}">INGREDIENTS</a>
-				{% if "user" in session %}
-				<a href="{{ url_for("my_recipes") }}">MY RECIPES</a>
-				<a href="{{ url_for("add_recipe") }}">ADD RECIPES</a>
-				<a href="{{ url_for("sign_out") }}">SIGN OUT</a>
-				{% else %}
-				<a href="{{ url_for("sign_in") }}">SIGN IN</a>
-				<a href="{{ url_for("register") }}">REGISTER</a>
-				{% endif %}
-				<h1 class="ml-auto pr-5 text-white">DishFinder</h1>
+				<div class="inline-menu">
+					<a href="{{ url_for("index") }}">HOME</a>
+					<a href="{{ url_for("show_all") }}">SHOW RECIPES</a>
+					<a href="{{ url_for("by_ingredient") }}">INGREDIENTS</a>
+					{% if "user" in session %}
+					<a href="{{ url_for("my_recipes") }}">MY RECIPES</a>
+					<a href="{{ url_for("add_recipe") }}">ADD RECIPES</a>
+					<a href="{{ url_for("sign_out") }}">SIGN OUT</a>
+					{% else %}
+					<a href="{{ url_for("sign_in") }}">SIGN IN</a>
+					<a href="{{ url_for("register") }}">REGISTER</a>
+					{% endif %}
+				</div>
+				<h1 class="px-3 text-white">DishFinder</h1>
+				<div class="custom-dropdown float-right"><button class="drop_button">&#9776;</button>
+					<div class="custom-dropdown-content">
+						<a href="{{ url_for("index") }}">HOME</a>
+						<a href="{{ url_for("show_all") }}">SHOW RECIPES</a>
+						<a href="{{ url_for("by_ingredient") }}">INGREDIENTS</a>
+						{% if "user" in session %}
+						<a href="{{ url_for("my_recipes") }}">MY RECIPES</a>
+						<a href="{{ url_for("add_recipe") }}">ADD RECIPES</a>
+						<a href="{{ url_for("sign_out") }}">SIGN OUT</a>
+						{% else %}
+						<a href="{{ url_for("sign_in") }}">SIGN IN</a>
+						<a href="{{ url_for("register") }}">REGISTER</a>
+						{% endif %}
+					</div>
+				</div>
 			</div>
 		</div>
 	</header>
