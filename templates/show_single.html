@@ -9,7 +9,9 @@
 			<p>Calories: {{ single_recipe.calories }} kcal</p>
 			<p>Time: {{ single_recipe.time }} min</p>
 			<p>Serves: {{ single_recipe.serves }}</p>
+			{% if single_recipe.substitute_1 %}
 			<p>Substitute ingredient: {{ single_recipe.substitute_1 }}</p>
+			{% endif %}
 		
 		{% if "user" in session %}
 			<div>

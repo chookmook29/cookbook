@@ -1,8 +1,6 @@
 # DishFinder
 
-One or two paragraphs providing an overview of your project.
-
-Essentially, this part is your sales pitch.
+DishFinder is a web application for people who want to upload their favourite recipes and share them with others. Thanks to implementation of voting mechanism, viewers can save time and effort by finding best, most popular recipes with ease.
  
 ## UX
  
@@ -19,22 +17,42 @@ In particular, as part of this section we recommend that you provide a list of U
 - As a user, I want to be able to see which users contributed how many recipes.
 - As a user, I want to view all recipes in database.
 
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+### Wireframes
+
+Examples of wireframes I've used for this project:
+- [All recipes](https://github.com/chookmook29/cookbook/blob/master/wireframes/all.png)
+- [Early idea of index page](https://github.com/chookmook29/cookbook/blob/master/wireframes/intro.png)
+- [Detailed search](https://github.com/chookmook29/cookbook/blob/master/wireframes/search.png)
+- [Single recipe view](https://github.com/chookmook29/cookbook/blob/master/wireframes/single_one.png)
+
+Some concepts of the design and some features changed over time in the development process.
+
+##Database Schema:
+
+![Database Schema](/database_schema/db.png)
+
+More detailed version as [html document](/database_schema/db.html).
 
 ## Features
 
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
+ - Sign in/Register form - allows users to use existing account or create new account, adding to database. Followed by flash message and redirect.
+ - Add/edit recipe form - user can create a new recipe, inserting to database or edit existing recipe by updating it.
+ - Delete feature  - users that are logged in can delete recipe from database.
+ - Filter by ingredient - this will allow the user to be shown all recipes from a specific cuisine which they have chosen from the homepage.
+ - Sign Out - user will be logged out from current session, returning to index page while session data being erased.
  
 ### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
-
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
-
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
+- Browsing feature - allows users browse recipes, by ingredient or all at once.
+- Cookbook feature - allows users to create, delete and update their recipes, register and sign in.
+- Voting feature - allows users to vote for or against existing recipes.
+- Search feature - allows users to find recipes by using keyword.
+- Summary feature - allows user to check who contributed most recipes.
 
 ### Features Left to Implement
-- Another feature idea
+- Make voting change recipe's position in show_all.html, after summing up negative and positive votes.
+- Making popular recipes more exposed to viewers.
+- More detailed recipes by adding more fields in database entries.
+- More sophisticated search options.
 
 ## Technologies Used
 
@@ -61,14 +79,14 @@ In addition, you may also use this section to discuss plans for additional featu
     - Free MongoDB database.
 - [PEP8]http://pep8online.com/
     - Used to check python syntax errors.
+- [JSlint]https://www.jslint.com/
+    - Used to check JS snippet.
 
 
 
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
-
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
+When writing backend code I used unittest before adding new functionalities. I have also manually tested views to see if scenarios from user stories are giving desirable results. The project has been tested on various browsers, including Firefox, Chrome, Opera, and Safari. Tests can be found in test.py file.
 
 For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
 
@@ -82,7 +100,9 @@ In addition, you should mention in this section how your project looks and works
 
 You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+### User testing:
+
+Web application was also tested by group of users using similar scenarios as mentioned in manual testing. Feedback helped with further development.
 
 ## Deployment
 
