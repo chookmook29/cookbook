@@ -27,7 +27,7 @@ Examples of wireframes I've used for this project:
 
 Some concepts of the design and some features changed over time in the development process.
 
-##Database Schema:
+## Database Schema:
 
 ![Database Schema](/database_schema/db.png)
 
@@ -63,7 +63,6 @@ More detailed version as [html document](/database_schema/db.html).
 - [Python](https://www.python.org/)
     - Back-end was written in **Python** .
     - **vnev** library was used in development of the project.
-    - **random** module was used with dictionaries.
 - [Flask](http://flask.pocoo.org/)
     - The project was built **flask** microframework due to its simplicity.
     - **flask.session** was used to store all variables values. 
@@ -81,24 +80,31 @@ More detailed version as [html document](/database_schema/db.html).
     - Used to check python syntax errors.
 - [JSlint]https://www.jslint.com/
     - Used to check JS snippet.
+- [Font Awesome](https://fontawesome.com/)
+    - Icons for the application.
 
 
 
 ## Testing
 
-When writing backend code I used unittest before adding new functionalities. I have also manually tested views to see if scenarios from user stories are giving desirable results. The project has been tested on various browsers, including Firefox, Chrome, Opera, and Safari. Tests can be found in test.py file.
+## Testing
 
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
+When writing backend code I used unittest before adding new functionalities. I have also manually tested views to see if scenarios from user stories are giving desirable results.
+The project has been tested on various browsers, including Firefox, Chrome, Opera, and Safari. 
+All tests can be found in test.py file.
 
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
+### Automated tests for code logic:
 
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
+- test_vote_logic(self) - checks if voting is working correctly
+- test_list_dictionary(self) - checks if dictionary for d3 chart is being populated correctly
+- test_length(self) - checks if username's incorrect length is detected
+    
+### Automated tests for deployed version:
 
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
+- test_initial(self) - testing GET request of a index.html template and a response code  
+- test_show_all(self)- testing GET request of show_all.html
+- test_test_show_single(self) - testing if show_single.html template is deployed
+
 
 ### User testing:
 
@@ -139,7 +145,8 @@ To run it locally:
 ### Content
 
 - Images where taken from [Shutterstock.com](https://www.shutterstock.com/)
-- Font was taken [FontSquirrel.com](https://www.fontsquirrel.com/)
+- Font was taken from [FontSquirrel.com](https://www.fontsquirrel.com/)
+- Some sample images taken from[BBC Food](https://www.bbc.com/food) 
 
 ### Media
 

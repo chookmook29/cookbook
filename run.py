@@ -78,12 +78,20 @@ def register():
             return render_template('register.html')
         else:
             user = request.form['user']
-            password = request.form['password']
-            users.insert({'user': user, 'password': password})
-            session['user'] = request.form['user']
-            # store user in server memory, used in subpages functions
-            flash('User registered')
-            return redirect(url_for('index'))
+            count_user = len(user)
+            if count_user < 3:# Prevents from entering too long username
+                flash('Name too short')
+                return render_template('register.html')
+            elif count_user > 10:
+                flash('Name too long')
+                return render_template('register.html')
+            else:
+                password = request.form['password']
+                users.insert({'user': user, 'password': password})
+                session['user'] = request.form['user']
+                # store user in server memory, used in subpages functions
+                flash('User registered')
+                return redirect(url_for('index'))
     return render_template('register.html')
 
 

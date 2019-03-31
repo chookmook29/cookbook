@@ -59,6 +59,33 @@ class FlaskTestCase(unittest.TestCase):
             self.assertNotEqual(voted_up, "")
 
 
+    def test_list_dictionary(self):
+        ingredient_list = []
+        counted_ingredients = {}
+        y = 'carrot'
+        ingredient_list.append(y)
+        for n in ingredient_list:
+            m = 2
+            if m == 0:
+                continue
+            else:
+                counted_ingredients[n] = m
+                self.assertEqual(counted_ingredients['carrot'], 2)
+
+
+    def test_length(self):
+        user = 'Frank'
+        count_user = len(user)
+        test = False
+        if count_user < 3:
+            test = False
+        elif count_user > 10:
+            test = False
+        else:
+            test = True
+            self.assertEqual(test, True)
+
+
 if __name__ == '__main__':
     
     unittest.main()
