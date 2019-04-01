@@ -216,6 +216,9 @@ p.footer {
 }
 p {
   font-size: 1.2rem;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }
 h1 {
 	font-family: chalk, Arial, sans-serif;
