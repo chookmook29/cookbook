@@ -18,6 +18,9 @@ src: url("font/Rudiment.ttf");
 h1 {
   margin-left: 0;
 }
+.form-control {
+  margin-right: 0.5rem;
+}
 }
 @media screen and (min-width: 576px) and (orientation: landscape){
 .carousel-inner img {
