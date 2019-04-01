@@ -21,6 +21,9 @@ h1 {
 .form-control {
   margin-right: 0.5rem;
 }
+.fixed-responsive {
+  position: static;
+}
 }
 @media screen and (min-width: 576px) and (orientation: landscape){
 .carousel-inner img {
@@ -37,6 +40,9 @@ h1 {
 }
 h1 {
   margin-left: 0;
+}
+.fixed-responsive {
+  position: static;
 }
 }
 @media screen and (min-width: 576px) and (orientation: portrait){
@@ -55,6 +61,9 @@ h1 {
 h1 {
   margin-left: 0;
 }
+.fixed-responsive {
+  position: static;
+}
 }
 @media screen and (min-width: 768px) and (orientation: landscape){
 .carousel-inner img {
@@ -71,6 +80,9 @@ h1 {
 }
 h1 {
   margin-left: 0;
+}
+.fixed-responsive {
+  position: fixed;
 }
 }
 @media screen and (min-width: 768px) and (orientation: portrait){
@@ -89,6 +101,9 @@ h1 {
 h1 {
   margin-left: 0;
 }
+.fixed-responsive {
+  position: fixed;
+}
 }
 @media screen and (min-width: 1024px) and (orientation: landscape){
 .carousel-inner img {
@@ -105,6 +120,9 @@ h1 {
 }
 h1 {
   margin-left: 0;
+}
+.fixed-responsive {
+  position: fixed;
 }
 }
 @media screen and (min-width: 1024px) and (orientation: portrait){
@@ -123,6 +141,9 @@ h1 {
 h1 {
   margin-left: 0;
 }
+.fixed-responsive {
+  position: fixed;
+}
 }
 @media screen and (min-width: 1200px) and (orientation: landscape){
 .carousel-inner img {
@@ -140,6 +161,9 @@ h1 {
 h1 {
   margin-left: auto;
 }
+.fixed-responsive {
+  position: fixed;
+}
 }
 @media screen and (min-width: 1200px) and (orientation: portrait){
 .carousel-inner img {
@@ -156,6 +180,9 @@ h1 {
 }
 h1 {
   margin-left: auto;
+}
+.fixed-responsive {
+  position: fixed;
 }
 }
 html {
@@ -231,6 +258,10 @@ a {
   position: fixed; 
   bottom: 0;
   width: 100%;
+}
+.fixed-responsive {
+  bottom: 0;
+  width: 100%
 }
 .custom-dropdown {
   position: relative;
