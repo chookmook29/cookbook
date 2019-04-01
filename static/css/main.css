@@ -269,3 +269,30 @@ a {
 .drop_button:hover {
   border: none;
 }
+.loader {
+  /* settings to keep loader central when position is fixed */
+  top: 50%;
+  left: 50%;
+  /* negative half of width and height used for margins to keep centered */
+  margin-top: -50px;
+  margin-left: -50px;
+  position: fixed;/* settings to keep loader central when position is fixed */
+  display: inline-block;
+  z-index: 1;
+  border: 16px solid #f2f2f2;
+  border-radius: 50%;
+  border-top: 16px solid #2d2d2d;
+  width: 100px;
+  height: 100px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
