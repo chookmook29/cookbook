@@ -1,33 +1,38 @@
-@font-face {/*Font used for <h1>*/
-font-family: "chalk";
+@font-face {
+font-family: "chalk";/* custom font used for <h1>, Rudiment.ttf reminds chalk on blackboard(restaurants, bars) */
 src: url("font/Rudiment.ttf");
 }
 @media screen and (max-width: 575px) and (orientation: portrait){
 .carousel-inner img {
-  width: 200%;
+  width: 200%;/* image wider then viewport(cropped), 
+  otherwise page would not have enough height, would be not proportional on mobile screens */
 }
 .inline-menu {
-  display: none;
+  display: none;/* traditional menu hidden on mobile screens for better user experience */
 }
-.drop_button {
+.drop_button {/* mobile menu visible */
   display: block;
 }
 .custom-dropdown {
-  margin-left: auto;
+  margin-left: auto;/* without this property, menu icon would be aligned to left side of the screen. 
+  To make app more interesting title and menu swap places on smaller screen sizes */
 }
 h1 {
-  margin-left: 0;
+  margin-left: 0;/* keeps app name aligned to left side, opposite it's original desktop full screen position */
 }
 .form-control {
-  margin-right: 0.5rem;
+  margin-right: 0.5rem;/* to keep search icon not too far from search form on desktop screens, 
+  this margin is for mobile only where search field occupies almost whole width of viewport.
+  This margin keeps it central by inserting margin similar to the one on the left */
 }
 .fixed-responsive {
-  position: static;
+  position: static;/* on smaller screens footer needs to be static instead of fixed, 
+  where elements are bigger than what can be viewed, fixed footer would overlap with content */
 }
 }
 @media screen and (min-width: 576px) and (orientation: landscape){
 .carousel-inner img {
-  width: 100%;
+  width: 100%;/* in landscape mode rectangular image looks better when not cropped, content more proportional */
 }
 .inline-menu {
   display: none;
@@ -47,7 +52,7 @@ h1 {
 }
 @media screen and (min-width: 576px) and (orientation: portrait){
 .carousel-inner img {
-  width: 190%;
+  width: 190%;/* slight adjustment according to screen size, more apropriate to crop less */
 }
 .inline-menu {
   display: none;
@@ -82,7 +87,8 @@ h1 {
   margin-left: 0;
 }
 .fixed-responsive {
-  position: fixed;
+  position: fixed;/* static positioning not needed as components are small enough to fit any viewport
+  and footer can be attached to bottom without overlapping */
 }
 }
 @media screen and (min-width: 768px) and (orientation: portrait){
@@ -102,7 +108,8 @@ h1 {
   margin-left: 0;
 }
 .fixed-responsive {
-  position: fixed;
+  position: fixed;/* static positioning not needed as components are small enough to fit any viewport
+  and footer can be attached to bottom without overlapping */
 }
 }
 @media screen and (min-width: 1024px) and (orientation: landscape){
@@ -122,7 +129,8 @@ h1 {
   margin-left: 0;
 }
 .fixed-responsive {
-  position: fixed;
+  position: fixed;/* static positioning not needed as components are small enough to fit any viewport
+  and footer can be attached to bottom without overlapping */
 }
 }
 @media screen and (min-width: 1024px) and (orientation: portrait){
@@ -153,16 +161,19 @@ h1 {
   display: inline-block;
 }
 .drop_button {
-  display: none;
+  display: none;/* mobile dropdown menu hidden from view on desktop screen, as there is now enough space
+  for traditional menu */
 }
 .custom-dropdown {
-  margin-left: 0;
+  margin-left: 0;/* dropdown moving to left side to make space to app name */
 }
 h1 {
-  margin-left: auto;
+  margin-left: auto;/* app name on right side of the viewport, standard menu on the left,
+  different then on mobile devices */
 }
 .fixed-responsive {
-  position: fixed;
+  position: fixed;/* static positioning not needed as components are small enough to fit any viewport
+  and footer can be attached to bottom without overlapping */
 }
 }
 @media screen and (min-width: 1200px) and (orientation: portrait){
@@ -182,32 +193,30 @@ h1 {
   margin-left: auto;
 }
 .fixed-responsive {
-  position: fixed;
+  position: fixed;/* static positioning not needed as components are small enough to fit any viewport
+  and footer can be attached to bottom without overlapping */
 }
 }
 html {
-  height: 100%;
+  height: 100%;/* prerequisite for body to fit 100% of browser window */
 }
 body {
-  min-height: 100%;
+  min-height: 100%; /* body is 100% browser window when html's height is set to 100% */
   font-family: sans-serif, Arial, Helvetica;
 }
-footer {
-	background-color: #2d2d2d;
-}
-.topnav {
- 	background-color: #2d2d2d;
+footer, .topnav, .custom-container {
+	background-color: #2d2d2d;/* same colour for top and bottom of viewport, better stylistically */
 }
 .topnav a {
 	float: left;
 	color: #f4f4f4;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 14px 16px;/* makes dropdown menu bigger and easier to use */
 	text-decoration: none;
 }
 .topnav a:hover {
   	background-color: #ededed;
-  	color: black;
+  	color: #2d2d2d;
 }
 p.footer {
 	color: #f4f4f4;
@@ -216,7 +225,7 @@ p.footer {
 }
 p {
   font-size: 1.2rem;
-  -webkit-hyphens: auto;
+  -webkit-hyphens: auto;/* hyphens used for better formatted paragraphs */
   -ms-hyphens: auto;
   hyphens: auto;
 }
@@ -225,63 +234,45 @@ h1 {
 	font-size: 2.8rem;
 	margin-bottom: 0;
 }
-.custom-container {
-  background-color: #2d2d2d;
-}
 a {
-	color: black;
+	color: #2d2d2d;
 	text-decoration: underline;
 }
 .fa-thumbs-up {
-  color: green;
+  color: green;/* to represent positive aspect of upvoting, icon is coloured green */
 }
 .fa-thumbs-down {
-  color: red;
+  color: red;/* red colour for downvotes, similar to popular portals */
 }
 .fa-search {
-  color: white;
+  color: #f4f4f4;
   padding-top: 0.2rem;
 }
-.search {
-  margin-bottom: 1%;
-  margin-left: 1%;
-  margin-right: 1%;
-}
-.btn-link{
-  border: none;
-  outline: none;
-  background: none;
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-  font-family: inherit;
-  font-size: inherit;
-}
-.fixed {
+.fixed {/* used for fixed footer */
   position: fixed; 
   bottom: 0;
   width: 100%;
 }
-.fixed-responsive {
+.fixed-responsive {/* settings only used when class has position:fixed, used here to avoid duplicating in every single media query */
   bottom: 0;
-  width: 100%
+  width: 100%;
 }
 .custom-dropdown {
   position: relative;
   display: inline-block;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 2;/* without increasing z-index element would stay behing carousel image */
 }
 .custom-dropdown-content {
   display: none;
-  background-color: white;
+  background-color: #f4f4f4;
   position: absolute;
   right: 0;
 }
 .custom-dropdown-content a {
   width: 160px;
   text-align: left;
-  color: black;
+  color: #2d2d2d;
   text-decoration: none;
   display: block;
 }
@@ -293,18 +284,18 @@ a {
 }
 .drop_button {
   font-size: 2.8rem;
-  border: none;
-  background-color: transparent;
-  color: white;
-  outline: none;
+  border: none;/* getting rid of all elements traditionally associated with buttons, more original look */
+  background-color: transparent;/* settings that make button more blended with other elements */
+  color: #f4f4f4;
+  outline: none;/* more elements being removed for design reasons */
   margin-top: -10px;
 }
 .drop_button:focus {
-  border: none;
+  border: none;/* lack of decorations for modern design */
   outline: none;
 }
 .drop_button:hover {
-  border: none;
+  border: none;/* minimalistic look for more modern feel */
 }
 .loader {
   /* settings to keep loader central when position is fixed */
@@ -313,10 +304,10 @@ a {
   /* negative half of width and height used for margins to keep centered */
   margin-top: -50px;
   margin-left: -50px;
-  position: fixed;/* settings to keep loader central when position is fixed */
+  position: fixed;/
   display: inline-block;
-  z-index: 1;
-  border: 16px solid #f2f2f2;
+  z-index: 1;/* to prevent loader from being covered by other elements */
+  border: 16px solid #f4f4f4;
   border-radius: 50%;
   border-top: 16px solid #2d2d2d;
   width: 100px;
