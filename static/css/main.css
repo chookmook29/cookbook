@@ -218,7 +218,7 @@ footer, .topnav, .custom-container {
   	background-color: #ededed;
   	color: #2d2d2d;
 }
-p.footer {
+.footer {
 	color: #f4f4f4;
   font-size: 1rem;
   margin-bottom: 0; 
@@ -287,15 +287,26 @@ a {
   border: none;/* getting rid of all elements traditionally associated with buttons, more original look */
   background-color: transparent;/* settings that make button more blended with other elements */
   color: #f4f4f4;
-  outline: none;/* more elements being removed for design reasons */
   margin-top: -10px;
 }
 .drop_button:focus {
   border: none;/* lack of decorations for modern design */
-  outline: none;
+  outline: none;/* more elements being removed for design reasons */
 }
 .drop_button:hover {
   border: none;/* minimalistic look for more modern feel */
+}
+.btn-link{/* search button settings, background colour has to match navbar's colour */
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+.btn-link:focus {
+  outline: none;
 }
 .loader {
   /* settings to keep loader central when position is fixed */
@@ -304,7 +315,7 @@ a {
   /* negative half of width and height used for margins to keep centered */
   margin-top: -50px;
   margin-left: -50px;
-  position: fixed;/
+  position: fixed;
   display: inline-block;
   z-index: 1;/* to prevent loader from being covered by other elements */
   border: 16px solid #f4f4f4;
@@ -312,6 +323,7 @@ a {
   border-top: 16px solid #2d2d2d;
   width: 100px;
   height: 100px;
+  -moz-animation: spin 2s linear infinite;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
