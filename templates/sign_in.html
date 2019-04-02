@@ -2,8 +2,8 @@
 {% block title%}Sign In{% endblock %}
 {% block content %}
 	<main>
-		<div class="container w-50">
-			<div class="my-5">
+		<div class="container w-50"><!--  max width of elements is 50%, otherwise would be too stretched, Bootstrap class -->
+			<div class="my-5"><!-- margin to keep distance from other elements in Y axis, Bootstrap class -->
 				<form action="{{ url_for("sign_in") }}" method="POST">
 					<label for="user">Username</label>
 					<input type="text" name="user" class="form-control" required>
@@ -14,8 +14,8 @@
 			</div>
 		</div>
 	</main>
-	<footer class="fixed">
-	        <div class="text-center">
+	<footer class="fixed"><!-- position: fixed class because too little content for whole viewport -->
+	        <div class="text-center"><!-- Bootstrap class that centers text -->
 	            <p class="footer">Copyright &#169; 2019</p>
 	        </div>
 	</footer>

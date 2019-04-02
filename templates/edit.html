@@ -3,9 +3,11 @@
 {% block content %}
 	<main>
 		<div class="container my-4">
+			<!-- better overall look with some margins, to avoid cluttering custom CSS rules Bootstrap class is being used -->
 			<form action="{{url_for("update_recipe")}}" method="POST">
 				<label for="name">Recipe name</label>
 				<input type="text" name="name" class="form-control" value="{{ single_edit.name }}" required>
+				<!-- fields required, prevents user from sending empty form -->
 				<label for="image">Image URL</label>
 				<input type="text" name="image" class="form-control" value="{{ single_edit.image }}" required>
 				<label for="description">Description</label>
@@ -21,11 +23,12 @@
 				<label for="substitute_1">Subsitute ingredient</label>
 				<input type="text" name="substitute_1" class="form-control" value="{{ single_edit.substitute_1 }}">
 				<button type="submit" name="action" class="btn btn-dark mt-2">Update</button>
+				<!-- uses Bootstrap button dark class, enhancing the experience -->
 			</form>
 		</div>
 	</main>
-	<footer>
-		<div class="text-center">
+	<footer><!-- footer not fixed because form too large to fit viewport -->
+		<div class="text-center"><!-- Bootstrap class that centers text -->
 			<p class="footer">Copyright &#169; 2019</p>
 		</div>
 	</footer>

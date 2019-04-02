@@ -3,13 +3,13 @@
 {% block content %}
 	<main>
 		<div class="container">
-			<div class="text-center">
-				<p class="mt-5">Sorry, no results...</p>
-				<a href="{{ url_for("index") }}"><button class="btn btn-dark mt-2">Back</button></a>
+			<div class="text-center"><!-- Bootstrap text centered class for better visual representation -->
+				<p class="mt-5">Sorry, no results...</p><!-- better overall look with some margins, to avoid cluttering custom CSS rules Bootstrap class is being used -->
+				<a href="{{ url_for("index") }}"><button class="btn btn-dark mt-2">Back</button></a><!-- uses Bootstrap button dark class, enhancing the experience -->
 			</div>
 		</div>
 	</main>
-	<footer class="fixed">
+	<footer class="fixed"><!-- position: fixed class because too little content for whole viewport -->
 	        <div class="text-center">
 	            <p class="footer">Copyright &#169; 2019</p>
 	        </div>

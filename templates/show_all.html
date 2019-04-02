@@ -1,24 +1,25 @@
 {% extends "base.html" %}
 {% block title%}All Recipes{% endblock %}
 {% block content %}
-    <script type="text/javascript">
+    <script type="text/javascript">// jQuery snippet too trivial to store in separate file
         $(window).on('load',function() {
             $('.loader').remove();
         })
     </script>
     <main>
-        <div class="loader"></div>
+        <div class="loader"></div><!-- element controlled by jQuery script -->
         <div class="container">
-            <div class="row pt-4">
+            <div class="row pt-4"><!-- better overall look with some padding, to avoid cluttering custom CSS rules Bootstrap class is being used -->
             {% for recipe in recipes %}
-                <div class="col-6">
-                    <div class="card">
+                <div class="col-6"><!-- to make two recipes visible in one row, Bootstrap's grid column is being used -->
+                    <div class="card"><!-- Bootstrap classes for a card category display -->
                       <a href="{{url_for("show_single", single_id=recipe._id)}}">
                         <img class="card-img-top" src="{{ recipe.image }}" alt="Card image cap">
                       </a>
+                      <!-- image is also a link, to improve UX, implemented after users testing -->
                       <div class="card-body">
                         <h5 class="card-title"><a href="{{url_for("show_single", single_id=recipe._id)}}">{{recipe.name.capitalize()}}</a></h5>
-                        <p class="card-text">{{ recipe.description[0:100] + "..."}}</p>
+                        <p class="card-text">{{ recipe.description[0:99] + "..."}}</p><!-- description limited to 100 characters only because of space constraints -->
                         <i class="far fa-thumbs-up fa-2x"></i>{{ recipe.upvotes }}
                         <i class="far fa-thumbs-down fa-2x"></i>{{ recipe.downvotes }}
                       </div>
@@ -29,7 +30,7 @@
         </div>
     </main>
     <footer>
-        <div class="text-center mt-4">
+        <div class="text-center mt-4"><!-- footer not fixed because form too large to fit viewport -->
             <p class="footer">Copyright &#169; 2019</p>
         </div>
     </footer>

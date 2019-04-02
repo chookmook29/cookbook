@@ -2,12 +2,13 @@
 {% block title%}My Recipes{% endblock %}
 {% block content %}
 	<main>
-		<div class="container mt-4">
+		<div class="container mt-4"><!-- margin to keep distance from other elements, Bootstrap class -->
 			{% for recipe in my_recipes %}
 				<div>
-					<ul class="nav nav-tabs nav-justified">
+					<ul class="nav nav-tabs nav-justified"><!-- all Bootstrap classes to declutter CSS file -->
 					<li class="nav-item">
 					<a class="nav-link active" href="{{url_for("show_single", single_id=recipe._id, image=recipe.image, description=recipe.description, key_1=recipe.key_ingredient_1, calories=recipe.calories, time=recipe.time, serves=recipe.serves, sub_1=recipe.substitute_1, voted_list=recipe.voted_list, upvotes=recipe.upvotes, downvotes=recipe.downvotes)}}">{{recipe.name.capitalize()}}</a>
+					<!-- all recipies are made lower case with a method when added, now they're being capitalized again before displaying, lack of capitalization makes search function easier to implement -->
 					</li>
 					<li class="nav-item">
 					<a class="nav-link" href="{{url_for("edit_recipe", edit_id=recipe._id)}}">Edit Recipe</a>
@@ -20,11 +21,11 @@
 			{% endfor %}
 		</div>
 		<div class="text-center">
-			<a href="{{ url_for("index") }}"><button class="btn btn-dark mt-4">Back</button></a>
+			<a href="{{ url_for("index") }}"><button class="btn btn-dark mt-4">Back</button></a><!-- uses Bootstrap button dark class, enhancing the experience -->
 		</div>
 	</main>
-	<footer class="fixed">
-        <div class="text-center">
+	<footer class="fixed"><!-- position: fixed class because too little content for whole viewport -->
+        <div class="text-center"><!-- Bootstrap class that centers text -->
             <p class="footer">Copyright &#169; 2019</p>
         </div>
 	</footer>

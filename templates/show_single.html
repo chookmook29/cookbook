@@ -2,8 +2,8 @@
 {% block title%}Single Recipe{% endblock %}
 {% block content %}
 	<main>
-		<div class="container text-center mt-4">
-			<h2>{{ single_recipe.name.capitalize() }}</h2>
+		<div class="container text-center mt-4"><!-- Bootstrap margin and text centered class for better visual representation -->
+			<h2>{{ single_recipe.name.capitalize() }}</h2><!-- all recipies are made lower case with a method when added, now they're being capitalized again before displaying, lack of capitalization makes search function easier to implement -->
 			<img class="img-fluid" src="{{ single_recipe.image }}" alt="Image">
 			<p class="mt-3">{{ single_recipe.description }}</p>
 			<p>Calories: {{ single_recipe.calories }} kcal</p>
@@ -13,25 +13,25 @@
 			<p>Substitute ingredient: {{ single_recipe.substitute_1 }}</p>
 			{% endif %}
 		
-		{% if "user" in session %}
+		{% if "user" in session %}<!-- some options only appear after logging in, hence if statement -->
 			<div>
 				<a href="{{url_for("upvote_recipe", single_id=single_recipe._id)}}"><i class="far fa-thumbs-up fa-3x"></i>{{ single_recipe.upvotes }}</a>
 				<a href="{{url_for("downvote_recipe", single_id=single_recipe._id)}}"><i class="far fa-thumbs-down fa-3x"></i>{{ single_recipe.downvotes }}</a>	
 			</div>	
 		{% else %}
-			<div class="mb-4">
+			<div class="mb-4"><!-- better overall look with some margins, to avoid cluttering custom CSS rules Bootstrap class is being used -->
 				<i class="far fa-thumbs-up fa-3x"></i>{{ single_recipe.upvotes }}
 				<i class="far fa-thumbs-down fa-3x"></i>{{ single_recipe.downvotes }}
 			</div>
-			<p>Register or sign in to vote!</p>
+			<a href="{{ url_for("index") }}"><p>Register or sign in to vote!</p></a>
 		{% endif %}
 		</div>
-		<div class="text-center my-4">
+		<div class="text-center my-4"><!-- margin to keep distance from other elements in Y axis, Bootstrap class -->
 			<a href="{{ url_for("show_all") }}"><button class="btn btn-dark mt-2">Back</button></a>
 		</div>
 	</main>
 	<footer>
-	        <div class="text-center">
+	        <div class="text-center"><!-- Bootstrap class that centers text -->
 	            <p class="footer">Copyright &#169; 2019</p>
 	        </div>
 	</footer>

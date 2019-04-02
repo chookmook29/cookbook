@@ -1,32 +1,35 @@
  <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block title %}{% endblock %}</title>
+	<title>{% block title %}{% endblock %}</title><!-- title changes with every template -->
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!--  browser will render the width of the page at the width of its own screen, needed for responsive design -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<!-- projects to small to use full Bootstrap library -->
+	<!-- next three script links are required by Bootstrap 4 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script><!-- used by ingredient.html pie chart -->
+	<!-- service providing voting and search icons(thumbs up, down and magnifying glass) -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	<link rel="stylesheet" href="{{ url_for("static", filename="css/main.css") }}">
-	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}">
+	<link rel="stylesheet" href="{{ url_for("static", filename="css/main.css") }}"><!-- link to custom CSS rules -->
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}"><!-- link to favicon, would otherwise display error in virtual environment -->
 </head>
 <body>
 	<header>
-		{% with messages = get_flashed_messages() %}
+		{% with messages = get_flashed_messages() %}<!-- flash messages, whenever user takes one of more significant actions -->
 		{% if messages %}
 		<div class="flashes">
 		{% for message in messages %}
-			<p class="mx-3 my-2">{{ message }}</p>
+			<p class="mx-3 my-2">{{ message }}</p><!-- Bootstrap margin classes in both X and Y axis -->
 		{% endfor %}
 		</div>
 		{% endif %}
 		{% endwith %}
-		<div class="topnav px-3">
+		<div class="topnav px-3"><!-- Bootstrap padding class -->
 			<div class="row">
-				<div class="inline-menu">
+				<div class="inline-menu"><!-- some of menu options only appear after logging in, hence if statement -->
 					<a href="{{ url_for("index") }}">HOME</a>
 					<a href="{{ url_for("show_all") }}">SHOW RECIPES</a>
 					<a href="{{ url_for("by_ingredient") }}">INGREDIENTS</a>
@@ -39,13 +42,14 @@
 					<a href="{{ url_for("register") }}">REGISTER</a>
 					{% endif %}
 				</div>
-				<h1 class="px-3 text-white">DishFinder</h1>
+				<h1 class="px-3 text-white">DishFinder</h1><!-- instead of using custom class, Bootstrap's pading and text-white used to colour h1 element, less custom css rules -->
 				<div class="custom-dropdown float-right"><button class="drop_button">&#9776;</button>
+				<!-- mobile menu as a character easier to manipulate -->
 					<div class="custom-dropdown-content">
 						<a href="{{ url_for("index") }}">HOME</a>
 						<a href="{{ url_for("show_all") }}">SHOW RECIPES</a>
 						<a href="{{ url_for("by_ingredient") }}">INGREDIENTS</a>
-						{% if "user" in session %}
+						{% if "user" in session %}<!-- only appears when user is stored in session -->
 						<a href="{{ url_for("my_recipes") }}">MY RECIPES</a>
 						<a href="{{ url_for("add_recipe") }}">ADD RECIPES</a>
 						<a href="{{ url_for("sign_out") }}">SIGN OUT</a>
@@ -59,6 +63,7 @@
 		</div>
 	</header>
 {% block content %}
+<!-- here goes markup for every html document in this catalogue -->
 {% endblock %}
 </body>
 </html>

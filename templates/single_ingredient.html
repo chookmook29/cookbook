@@ -4,17 +4,17 @@
 	<main>
 		<div class="container">
 			<h2>{{ key_ingredient.title() }} recipes</h2>
-			<p>Found: {{ recipes_total }}</p>
-			<div class="row mt-4">
+			<p>Found: {{ recipes_total }}</p><!-- amount of recipes found taken from db query -->
+			<div class="row mt-4"><!-- margin class for better positioning of recipe eleemnt -->
 				{% for recipe in recipes %}
-				<div class="col-6">
-					<div class="card">
+				<div class="col-6"><!-- Bootstrap class that makes it possible to display two recipes in one row -->
+					<div class="card"><!-- Bootstrap classes for a card category display -->
 					  <a href="{{url_for("show_single", single_id=recipe._id)}}">
                         <img class="card-img-top" src="{{ recipe.image }}" alt="Card image cap">
                       </a>
 					  <div class="card-body">
 					    <h5 class="card-title"><a href="{{url_for("show_single", single_id=recipe._id)}}">{{recipe.name.capitalize()}}</a></h5>
-					    <p class="card-text">{{ recipe.description[0:100] + "..."}}</p>
+					    <p class="card-text">{{ recipe.description[0:99] + "..."}}</p><!-- limit characters to 100, to display only first sentences of recipe -->
 					    <i class="far fa-thumbs-up fa-2x"></i>{{ recipe.upvotes }}
 						<i class="far fa-thumbs-down fa-2x"></i>{{ recipe.downvotes }}
 					  </div>
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</main>
-	<footer class="fixed">
+	<footer class="fixed"><!-- position: fixed class because too little content for whole viewport -->
 	        <div class="text-center">
 	            <p class="footer">Copyright &#169; 2019</p>
 	        </div>

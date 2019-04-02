@@ -3,17 +3,18 @@
 {% block content %}
 	<main>
 		<div class="container">
-			<p class="mt-4">Found: {{ recipes_total }}</p>
-			<div class="row pt-4">
+			<p class="mt-4">Found: {{ recipes_total }}</p><!-- amount of recipes found taken from db query -->
+			<div class="row pt-4"><!-- margin class for better positioning of recipe eleemnt -->
 			{% for recipe in recipes %}
 				<div class="col-6">
 					<div class="card">
 					  <a href="{{url_for("show_single", single_id=recipe._id)}}">
                         <img class="card-img-top" src="{{ recipe.image }}" alt="Card image cap">
                       </a>
+                      <!-- image is also a link, to improve UX, implemented after users testing -->
 					  <div class="card-body">
 					    <h5 class="card-title"><a href="{{url_for("show_single", single_id=recipe._id)}}">{{recipe.name.capitalize()}}</a></h5>
-					    <p class="card-text">{{ recipe.description[0:100] + "..."}}</p>
+					    <p class="card-text">{{ recipe.description[0:99] + "..."}}</p><!-- description limited to 100 characters only because of space constraints -->
 					    <i class="far fa-thumbs-up fa-2x"></i>{{ recipe.upvotes }}
 						<i class="far fa-thumbs-down fa-2x"></i>{{ recipe.downvotes }}
 					  </div>

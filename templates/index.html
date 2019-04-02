@@ -1,20 +1,25 @@
 {% extends "base.html" %}
 {% block title%}Home{% endblock %}
 {% block content %}
-  <script type="text/javascript">
+  <script type="text/javascript">// jQuery snippet too trivial to store in separate file
     $(window).on('load',function() {
       $('.loader').remove();
       })
   </script>
   <main class="text-center">
     <div class="custom-container">
+      <!--
+        Search bar is only available in index.html, because it would cause a conflict
+        with other POST request on other subpages, so the only solution would be to create 
+        multiple POST requests in one app route, or keep it separated to avoid overcomplicated code
+      -->
       <form class="form-inline" action="{{ url_for("by_search") }}" method="POST">
         <input type="text" name="search" class="form-control mb-2 ml-2 col-sm-3 col-md-3" placeholder="Search recipes"> 
         <button type="submit" name="search" class="btn-link mb-2 ml-1"><i class="fas fa-search fa-2x"></i></button>
       </form>
     </div>
-    <div class="loader"></div>
-    <div id="demo" class="carousel slide" data-ride="carousel">
+    <div class="loader"></div><!-- element controlled by jQuery script -->
+    <div id="demo" class="carousel slide" data-ride="carousel"><!-- Bootstrap 4 carousel module -->
       <ul class="carousel-indicators">
         <li data-target="#demo" data-slide-to="0" class="active"></li>
         <li data-target="#demo" data-slide-to="1"></li>
@@ -52,7 +57,7 @@
     </div>
   </main>
   <footer>
-    <div class="text-center">
+    <div class="text-center"><!-- Bootstrap class that centers text -->
       <p class="footer">Copyright &#169; 2019</p>
     </div>
   </footer>

@@ -5,15 +5,16 @@
         <div class="container">
             <div class="row">
                 <div id="chart" class="col-sm-12 col-md-6 py-4"></div>
+                <!-- D3.js chart script, can't be moved to seperate .js file because it's using Jinja templates -->
                 <script type="text/javascript">
                 	var w = 350;
                     var h = 350;
                     var r = 165;
                     var color = d3.scale.category20c();
-                    var data = [{% for key, value in counted_ingredients.items() %}
-                        {"label":"{{key}}", "value":{{value}}},
+                    var data = [{% for key, value in counted_ingredients.items() %}// items() method returns list of keys and values
+                        {"label":"{{key}}", "value":{{value}}},// Jinja template fills label and value fields for every ingredient in database
                         {% endfor %}];
-
+                    // inserting svg element
                     var vis = d3.select("#chart")
                         .append("svg:svg")
                         .data([data])
@@ -25,11 +26,11 @@
                     var pie = d3.layout.pie().
                             value(function(d){return d.value;});
 
-                    // declare an arc generator function
+                    // declaring an arc generator function
                     var arc = d3.svg.arc()
                         .outerRadius(r);
 
-                    // select paths, use arc generator to draw
+                    // selecting paths, use arc generator to draw
                     var arcs = vis.selectAll("g.slice")
                         .data(pie)
                         .enter()
@@ -53,7 +54,9 @@
                     <div class="text-center col-sm-12 col-md-4 mt-5">
                         <h3>Key Ingredients:</h3>
                     {% for key, value in counted_ingredients.items() %}
-                    	<a href="{{ url_for("ingredient_recipes", key_ingredient=key) }}" style="font-size:{{ (value * 2) + 12 }}px;">{{ key }}</a>
+                        <!-- for every ingredient font is being changed according to amount of given ingredient in recipes -->
+                    	<a href="{{ url_for("ingredient_recipes", key_ingredient=key) }}" style="font-size:{{ (value * 2) + 12 }}px;">{{ key }}
+                        </a>
                         <br>
                     {% endfor %}
                     </div>
@@ -63,12 +66,14 @@
                 </div>
                 <div class="pl-4 row">
                     {% for key, value in counted_contributors.items() %}
+                    <!-- font size being changed depending on amount of recipes created by every user -->
                         <p style="font-size:{{ (value * 2) + 12 }}px;">{{key}}: {{value}} &nbsp;</p>
                         {% endfor %}
                 </div>
             </div>
     </main>
     <footer class="fixed-responsive">
+            <!-- footer is static when in small screen mode to contain all elements, and becomes fixed on bigger screens with media queries -->
             <div class="text-center">
                 <p class="footer">Copyright &#169; 2019</p>
             </div>
