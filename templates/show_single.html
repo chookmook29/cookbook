@@ -5,7 +5,7 @@
 		<div class="container text-center mt-4"><!-- Bootstrap margin and text centered class for better visual representation -->
 			<h2>{{ single_recipe.name.capitalize() }}</h2><!-- all recipies are made lower case with a method when added, now they're being capitalized again before displaying, lack of capitalization makes search function easier to implement -->
 			<img class="img-fluid" src="{{ single_recipe.image }}" alt="Image">
-			<p class="mt-3">{{ single_recipe.description }}</p>
+			<p class="mt-3 recipe-text d-inline-block">{{ single_recipe.description }}</p><!-- few Bootstrap classes used to keep paragraph same size as image -->
 			<p>Calories: {{ single_recipe.calories }} kcal</p>
 			<p>Time: {{ single_recipe.time }} min</p>
 			<p>Serves: {{ single_recipe.serves }}</p>

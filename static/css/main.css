@@ -17,6 +17,10 @@ src: url("font/Rudiment.ttf");
   margin-left: auto;/* without this property, menu icon would be aligned to left side of the screen. 
   To make app more interesting title and menu swap places on smaller screen sizes */
 }
+.recipe-text {/* makes recipe's description same size as recipe's image on different screen sizes, 
+need Bootstrap's class d-inline-block to work */
+  width: 100%;
+}
 h1 {
   margin-left: 0;/* keeps app name aligned to left side, opposite it's original desktop full screen position */
 }
@@ -43,6 +47,9 @@ h1 {
 .custom-dropdown {
   margin-left: auto;
 }
+.recipe-text {
+  width: 100%;
+}
 h1 {
   margin-left: 0;
 }
@@ -66,6 +73,9 @@ h1 {
 h1 {
   margin-left: 0;
 }
+.recipe-text {
+  width: 100%;
+}
 .fixed-responsive {
   position: static;
 }
@@ -82,6 +92,9 @@ h1 {
 }
 .custom-dropdown {
   margin-left: auto;
+}
+.recipe-text {
+  width: 100%;
 }
 h1 {
   margin-left: 0;
@@ -103,6 +116,9 @@ h1 {
 }
 .custom-dropdown {
   margin-left: auto;
+}
+.recipe-text {
+  width: 100%;
 }
 h1 {
   margin-left: 0;
@@ -128,6 +144,9 @@ h1 {
 h1 {
   margin-left: 0;
 }
+.recipe-text {
+  width: 100%;
+}
 .fixed-responsive {
   position: fixed;/* static positioning not needed as components are small enough to fit any viewport
   and footer can be attached to bottom without overlapping */
@@ -145,6 +164,9 @@ h1 {
 }
 .custom-dropdown {
   margin-left: auto;
+}
+.recipe-text {
+  width: 75%;
 }
 h1 {
   margin-left: 0;
@@ -171,6 +193,9 @@ h1 {
   margin-left: auto;/* app name on right side of the viewport, standard menu on the left,
   different then on mobile devices */
 }
+.recipe-text {
+  width: 75%;
+}
 .fixed-responsive {
   position: fixed;/* static positioning not needed as components are small enough to fit any viewport
   and footer can be attached to bottom without overlapping */
@@ -188,6 +213,9 @@ h1 {
 }
 .custom-dropdown {
   margin-left: 0;
+}
+.recipe-text {
+  width: 100%;
 }
 h1 {
   margin-left: auto;
