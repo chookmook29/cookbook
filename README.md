@@ -85,11 +85,11 @@ More detailed version as [html document](/database_schema/db.html).
     - Adjusting elements of project's frontend.
 - [mLab](https://mlab.com/)
     - Free MongoDB database.
-- [PEP8]http://pep8online.com/
+- [PEP8](http://pep8online.com/)
     - Used to check python syntax errors.
-- [JSlint]https://www.jslint.com/
+- [JSlint](https://www.jslint.com/)
     - Used to check JS snippet.
-- [CSSlint]http://csslint.net/
+- [CSSlint](http://csslint.net/)
     - Check for CSS errors.
 - [Font Awesome](https://fontawesome.com/)
     - Icons for the application.
